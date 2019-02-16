@@ -1,6 +1,4 @@
-#!/bin/sh
-'''exec' "/home/ben/Dropbox/UVa/Software Engineering/project-102-13eta/venv/bin/python" "$0" "$@"
-' '''
+#!/home/ben/uva/project-102-13eta/venv/bin/python3.5
 # -*- coding: utf-8 -*-
 import re
 import sys
