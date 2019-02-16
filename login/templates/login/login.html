@@ -2,32 +2,58 @@
 {% load static %}
 
 {% block content %}
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+<script src="https://apis.google.com/js/api:client.js"></script>
+<link href="{% static "assets/css/style.css" %}" rel="stylesheet">
 
 <script>
-  var googleUser = {};
-  var startApp = function() {
-    gapi.load('auth2', function(){
-      // Retrieve the singleton for the GoogleAuth library and set up the client.
-      auth2 = gapi.auth2.init({
-        client_id: '239280034936-ff73cf0a91k15b950c393d2rls332nqu.apps.googleusercontent.com',
-        cookiepolicy: 'single_host_origin',
-        // Request scopes in addition to 'profile' and 'email'
-        //scope: 'additional_scope'
-      });
-      attachSignin(document.getElementById('customBtn'));
+var googleUser = {};
+var startApp = function() {
+  gapi.load('auth2', function(){
+    // Retrieve the singleton for the GoogleAuth library and set up the client.
+    auth2 = gapi.auth2.init({
+      <!-- [END pre-client_id] -->
+      client_id: '239280034936-ff73cf0a91k15b950c393d2rls332nqu.apps.googleusercontent.com',
+      <!-- [START post-client_id] -->
+      cookiepolicy: 'single_host_origin',
+      // Request scopes in addition to 'profile' and 'email'
+      //scope: 'additional_scope'
+    });
+    attachSignin(document.getElementById('customBtn'));
   });
 };
+
+function attachSignin(element) {
+  console.log(element.id);
+  auth2.attachClickHandler(element, {},
+    function(googleUser) {
+      document.getElementById('name').innerText = "Signed in: " +
+        googleUser.getBasicProfile().getName();
+    }, function(error) {
+      console.log(JSON.stringify(error, undefined, 2));
+    });
+}
 </script>
+<div id="gSignInWrapper">
+  <span class="label">Sign in with:</span>
+  <div id="customBtn" class="customGPlusSignIn">
+    <span class="icon"></span>
+    <span class="buttonText">Google</span>
+  </div>
+</div>
+<div id="name"></div>
+<script>startApp();</script>
 
+<!--
 
-<meta name="google-signin-scope" content="profile email">
-<meta name="google-signin-client_id" content="239280034936-ff73cf0a91k15b950c393d2rls332nqu.apps.googleusercontent.com">
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="239280034936-ff73cf0a91k15b950c393d2rls332nqu.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-<div class="g-signin2" data-onfailure="onFail" data-onsuccess="onSignIn" onclick="onSignIn" data-theme="dark"></div>
-<script>
-  function onSignIn(googleUser) {
-    // Useful data for your client-side scripts:
+  <div class="g-signin2" data-onfailure="onFail" data-onsuccess="onSignIn" onclick="onSignIn" data-theme="dark"></div>
+  <script>
+    function onSignIn(googleUser) {
+      // Useful data for your client-side scripts:
     var profile = googleUser.getBasicProfile();
     console.log("ID: " + profile.getId()); // Don't send this directly to your server!
     console.log('Full Name: ' + profile.getName());
@@ -36,7 +62,7 @@
     console.log("Image URL: " + profile.getImageUrl());
     console.log("Email: " + profile.getEmail());
 
-    // The ID token you need to pass to your backend:
+// The ID token you need to pass to your backend:
     var id_token = googleUser.getAuthResponse().id_token;
     console.log("ID Token: " + id_token);
   }
@@ -44,6 +70,6 @@
 function onFail(){
   console.log("failed");
 }
-</script>
-
-{% endblock %}
+  </script>
+  -->
+  {% endblock %}
