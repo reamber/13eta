@@ -8,6 +8,12 @@ from match_site.models import user
 
 # Create your views here.
 
-class LoginView(generic.TemplateView):
-    template_name = 'login/login.html'
+#class LoginView(generic.TemplateView):
+#    template_name = 'login/login.html'
 
+def getToken(request):
+    print('got tok')
+    if request.method == "POST":
+        print('post data')
+        print(request.POST)
+    return HttpResponseRedirect('/')

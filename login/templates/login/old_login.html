@@ -6,6 +6,8 @@
 <script src="https://apis.google.com/js/api:client.js"></script>
 <link href="{% static "assets/css/style.css" %}" rel="stylesheet">
 
+{% csrf_token %}
+
 <script>
 var googleUser = {};
 var startApp = function() {
@@ -19,7 +21,7 @@ var startApp = function() {
       // Request scopes in addition to 'profile' and 'email'
       //scope: 'additional_scope'
     });
-    attachSignin(document.getElementById('customBtn'));
+    attachSignin(document.getElementById('google-signin'));
   });
 };
 
@@ -27,21 +29,37 @@ function attachSignin(element) {
   console.log(element.id);
   auth2.attachClickHandler(element, {},
     function(googleUser) {
-      document.getElementById('name').innerText = "Signed in: " +
-        googleUser.getBasicProfile().getName();
+      document.getElementById('google-signin').innerText = "Sign out";
+      var id_token = googleUser.getAuthResponse().id_token;
+      console.log("Google id : " + id_token);
+      var csrf_tok = jQuery("[name=csrfmiddlewaretoken]").val(); 
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+          if (!this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrf_tok);
+          }
+        }
+      });
+      $.ajax({
+        type: "POST",
+        url: "/login/oauth_success",
+        data: {"idtoken" : id_token}
+      });
+      /*
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/login/oauth_success');
+      xhr.setRequestHeader('x-csrf-token', csrf_tok); 
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.onload = function() {
+          console.log('Signed in as: ' + xhr.responseText);
+      };
+      xhr.send('idtoken=' + id_token);
+      */
     }, function(error) {
       console.log(JSON.stringify(error, undefined, 2));
     });
 }
 </script>
-<div id="gSignInWrapper">
-  <span class="label">Sign in with:</span>
-  <div id="customBtn" class="customGPlusSignIn">
-    <span class="icon"></span>
-    <span class="buttonText">Google</span>
-  </div>
-</div>
-<div id="name"></div>
 <script>startApp();</script>
 
 <!--

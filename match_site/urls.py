@@ -17,5 +17,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('oauth_success', views.getToken, name="oath success" ),
+    path('', views.HomeView.as_view(), name="home" ),
 ]
