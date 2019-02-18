@@ -11,6 +11,10 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
+#https://stackoverflow.com/questions/48128419/heroku-django-app-not-loading-static-files-404-not-found
+from whitenoise.django import DjangoWhiteNoise
+application = DjangoWhiteNoise(application)
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'student_skill_matching.settings')
 
 application = get_wsgi_application()
