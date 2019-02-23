@@ -19,8 +19,8 @@ function attachSignin(element) {
   auth2.attachClickHandler(element, {},
     function(googleUser) {
       document.getElementById('google-signin').innerText = "Sign out";
-      var id_token = googleUser.getAuthResponse().id_token;
-      console.log("Google id : " + id_token);
+      var auth = googleUser.getAuthResponse().id_token;
+      var profile = googleUser.getBasicProfile();
       var csrf_tok = jQuery("[name=csrfmiddlewaretoken]").val(); 
       $.ajaxSetup({
         beforeSend: function(xhr, settings) {
@@ -32,10 +32,13 @@ function attachSignin(element) {
       $.ajax({
         type: "POST",
         url: "/login/oauth_success",
-        data: {"idtoken" : id_token}
+        data: {
+          "idtoken" : profile.getId(),
+          "name"    : profile.getName(),
+          "email"   : profile.getEmail(),
+        }
       });
     }, function(error) {
-      console.log(JSON.stringify(error, undefined, 2));
     });
 }
 

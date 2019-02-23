@@ -1,6 +1,7 @@
 from django.db import models
+from django.utils import timezone
 
-class roles(models.Model):
+class role(models.Model):
     role = models.CharField(max_length=20)
     role_id = models.IntegerField()
     def __str__(self):
@@ -9,8 +10,10 @@ class roles(models.Model):
 class user(models.Model):
     user_name = models.CharField(max_length=20)
     user_email = models.CharField(max_length=20)
-    user_join_date = models.DateTimeField('join date')
-    user_role = models.ForeignKey(roles, on_delete=models.CASCADE)
+    user_logged_in = models.BooleanField(default=False)
+    user_join_date = models.DateTimeField(default=timezone.now)
+    user_role = models.ForeignKey(role, on_delete=models.CASCADE)
+    user_google_id = models.CharField(max_length=1000)
     def __str__(self):
         return self.user_name
 
