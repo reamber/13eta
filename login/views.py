@@ -3,17 +3,31 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 from django import forms
+import logging
+import time
 
-from match_site.models import user
+from match_site.models import user, role
 
 # Create your views here.
 
 #class LoginView(generic.TemplateView):
 #    template_name = 'login/login.html'
 
+logger = logging.getLogger(__name__)
+
 def getToken(request):
-    print('got tok')
+    users = user.objects.all();
     if request.method == "POST":
-        print('post data')
-        print(request.POST)
+        for u in users:
+            if u.user_google_id == request.POST['idtoken']:
+                print('returning user')
+                return HttpResponseRedirect('/') 
+
+        new_user = user(user_name=request.POST['name'],
+                        user_logged_in=True,
+                        user_email=request.POST['email'],
+                        user_role=role.objects.get(role='user'),
+                        user_google_id=request.POST['idtoken'])
+        new_user.save()
+        print('new user added: ' + str(new_user))
     return HttpResponseRedirect('/')
