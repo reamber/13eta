@@ -1,13 +1,8 @@
 from django.db import models
 
 # Create your models here.
-class role(models.Model):
-    role = models.CharField(max_length=20)
-    role_id = models.IntegerField()
-    def __str__(self):
-        return self.role
 		
-class profile(modelss.Model):
+class profile(models.Model):
     profile_profile_pic = models.CharField(max_length=100)
     profile_background_image = models.CharField(max_length=100)
     profile_bio = models.CharField(max_length=200)
