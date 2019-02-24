@@ -20,7 +20,8 @@ def getToken(request):
     if request.method == "POST":
         for u in users:
             if u.user_google_id == request.POST['idtoken']:
-                print('returning user')
+                logger.debug('returning user')
+                u.user_logged_in=True
                 return HttpResponseRedirect('/') 
 
         new_user = user(user_name=request.POST['name'],
@@ -29,5 +30,5 @@ def getToken(request):
                         user_role=role.objects.get(role='user'),
                         user_google_id=request.POST['idtoken'])
         new_user.save()
-        print('new user added: ' + str(new_user))
+        logger.debug('new user added: ' + str(new_user))
     return HttpResponseRedirect('/')
