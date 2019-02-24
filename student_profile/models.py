@@ -12,5 +12,5 @@ class profile(models.Model):
     profile_contact_info = models.CharField(max_length=100)
     #ADD MODEL FOR TAGS TO RELATE USERS
     profile_user = models.ForeignKey(user, on_delete=models.CASCADE)
-    def __str__():
-        return ""
+    def __str__(self):
+        return self.profile_user.user_name + "'s Profile"
