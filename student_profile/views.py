@@ -13,3 +13,7 @@ class ProfileView(generic.DetailView):
     else:
         return HttpResponseRedirect('/login')
         '''
+
+def signup(generic.DetailView):
+    model = profile
+    template_name = 'signup.html'

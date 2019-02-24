@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>{{ "Create Your Profile" }}</h1>
+
+<form action="{% url 'student_profile:signup' user.user_name %} method="post">
+{% csrf_token %}
+    Name: <input type="text" name="profile_name"><br>
+    Location of Profile Picture: <input type="text" name="profile_pic"><br>
+    Enter a Short Bio: <input type="text" name="profile_bio"><br>
+    Enter Education Information: <input type="text" name="profile_education"><br>
+    Enter Your Interests: <input type="text" name="profile_interests"><br>
+    Enter Your Contact Information: <input type="text" name="profile_contact_info"><br>
+    <input type="submit" value="Signup">
+</form>
+
+{% endblock %}
