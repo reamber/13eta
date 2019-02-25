@@ -4,7 +4,7 @@
 {% block content %}
 <h1>{{ "Create Your Profile" }}</h1>
 
-<form action="{% url 'student_profile:getNewProfile' %} method="post">
+<form action="/profile/getNewProfile" method="post">
 {% csrf_token %}
     Name: <input type="text" name="profile_name"><br>
     Location of Profile Picture: <input type="text" name="profile_pic"><br>

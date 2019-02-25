@@ -14,4 +14,3 @@ class profile(models.Model):
     profile_user = models.ForeignKey(user, on_delete=models.CASCADE)
     def __str__(self):
         return self.profile_user.user_name + "'s Profile"
-

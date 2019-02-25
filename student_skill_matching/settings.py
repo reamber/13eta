@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login',
     'match_site',
-    'student_profile',
+    'user_profile',
 ]
 
 MIDDLEWARE = [

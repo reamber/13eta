@@ -29,13 +29,18 @@ function attachSignin(element) {
           }
         }
       });
-      $.ajax({
+      var result = $.ajax({
         type: "POST",
         url: "/login/oauth_success",
         data: {
           "idtoken" : profile.getId(),
           "name"    : profile.getName(),
           "email"   : profile.getEmail(),
+        },
+        complete: function(data){
+          if(data.responseText === "success"){
+            window.location.replace("/profile/signup");
+          }   
         }
       });
     }, function(error) {
