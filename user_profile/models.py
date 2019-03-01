@@ -1,6 +1,6 @@
 from django.db import models
 
-from match_site.models import user
+from django.contrib.auth.models import User
 
 # Create your models here.
 class profile(models.Model):
@@ -11,6 +11,6 @@ class profile(models.Model):
     profile_interests = models.CharField(max_length=100)
     profile_contact_info = models.CharField(max_length=100)
     #ADD MODEL FOR TAGS TO RELATE USERS
-    profile_user = models.ForeignKey(user, on_delete=models.CASCADE)
+    profile_user = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
-        return self.profile_user.user_name + "'s Profile"
+        return self.profile_user.first_name + "'s Profile"
