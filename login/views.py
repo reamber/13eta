@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 def getToken(request):
     users = user.objects.all();
+    print(request)
     if request.method == "POST":
         for u in users:
             if u.user_google_id == request.POST['idtoken']:
