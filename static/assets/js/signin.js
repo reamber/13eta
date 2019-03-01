@@ -10,7 +10,7 @@ var startSigninButton = function() {
       // Request scopes in addition to 'profile' and 'email'
       //scope: 'additional_scope'
     });
-    attachSignin(document.getElementById('google-signin'));
+    //attachSignin(document.getElementById('google-signin'));
   });
 };
 
