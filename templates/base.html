@@ -7,12 +7,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- STYLE SHEETS -->
-    <link rel = "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <link href="{% static "assets/css/style.css" %}" rel="stylesheet">
+    <link href="{% static "assets/css/bootstrap.min.css" %}" rel="stylesheet">
     <!-- JS -->
     <script type="text/javascript" src="{% static "assets/js/jquery-3.3.1.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "assets/js/signin.js" %}"></script>
+    <!--script type="text/javascript" src="{% static "assets/js/signin.js" %}"></script-->
+    <script type="text/javascript" src="{% static "assets/js/bootstrap.min.js" %}"></script>
     <script src="https://apis.google.com/js/api:client.js"></script>
     <!-- Signin script -->
     <script>startSigninButton();</script>
@@ -34,14 +34,13 @@
               <a class="nav-link" href="#">Messaging</a>
             </li>
             <li class="nav-item"> 
-              <a id="google-signin" class="nav-link" href="#">Sign In</a>
+              <a id="google-signin" class="nav-link" href="{% url 'social:begin' 'google-oauth2' %}">Sign In</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User Profile</a>
               <div class="dropdown-menu" aria-labelledby="dropdown01">
                 <a class="dropdown-item" href="#">Manage</a>
                 <a class="dropdown-item" href="#">Settings</a>
-                <a class="dropdown-item" href="#">Sign Out</a>
              </div>
             </li>                            
           </ul>
