@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect, get_object_or_404, render
+from django.contrib.auth import logout 
 from django.urls import reverse
 from django.views import generic
 from django import forms
@@ -9,13 +10,6 @@ import datetime
 from match_site.models import user, role
 
 # Create your views here.
-
-#class LoginView(generic.TemplateView):
-#    template_name = 'login/login.html'
-
-app_name='login'
-
-logger = logging.getLogger(__name__)
 
 '''
 def getToken(request):

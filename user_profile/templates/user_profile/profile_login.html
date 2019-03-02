@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div>
+  <div>
+    <h2>You are not signed in!</h2>
+  </div>
+  <a class="btn btn-success" class="nav-link" href="{% url 'social:begin' 'google-oauth2' %}">Sign In</a>
+</div>
+{% endblock %}
