@@ -31,16 +31,17 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testcase134.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
-        'django.contrib.admin',
-        'django.contrib.auth',
-        'django.contrib.contenttypes',
-        'django.contrib.sessions',
-        'django.contrib.messages',
-        'django.contrib.staticfiles',
-        'login',
-        'match_site',
-        'social_django'
-        ]
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'login',
+    'match_site',
+    'user_profile',
+    'social_django'
+]
 
 MIDDLEWARE = [
         'django.middleware.security.SecurityMiddleware',
@@ -130,11 +131,11 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '239280034936-ff73cf0a91k15b950c393d2rls332nqu.a
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'JsWbmraW8IiARaNCt8iOdKH-'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/profile'
-
+'''
 SOCIAL_AUTH_PIPELINE = (
         'social_core.pipeline.user.user_details',
-        )
-
+)
+'''
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
