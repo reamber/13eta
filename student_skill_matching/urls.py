@@ -16,11 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', include('login.urls')),
-    path('profile/', include('user_profile.urls')),
+    path('login/', include('login.urls', namespace='login')),
+    path('profile/', include('user_profile.urls', namespace='user_profile')),
     path('oauth/', include('social_django.urls', namespace='social')),
-    path('', include('match_site.urls'))
+    path('', include('match_site.urls')),
+    path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'assets/images/favicon.ico')),
 ]

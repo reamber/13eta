@@ -13,8 +13,11 @@ from match_site.models import user, role
 #class LoginView(generic.TemplateView):
 #    template_name = 'login/login.html'
 
+app_name='login'
+
 logger = logging.getLogger(__name__)
 
+'''
 def getToken(request):
     users = user.objects.all();
     if request.method == "POST":
@@ -43,3 +46,8 @@ def getToken(request):
         print('new user added: ' + str(new_user))
         return response
     return HttpResponse('failed')
+'''
+
+def signout(request):
+    logout(request)
+    return HttpResponseRedirect('/')
