@@ -37,6 +37,22 @@ h3 {
 	position:relative;
 	z-index:0;
 }
+.intro {
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	left: 0;
+	text-align: center;
+	padding: 0 15px;
+}
+
+.intro p{
+	color: #132238;
+}
+
+.resume{
+    position: relative;
+}
 
 .section-title {
     margin-bottom: 80px;
@@ -45,6 +61,22 @@ h3 {
     line-height: 50px;
     color: #364e68;
     position: relative;
+}
+
+.skills-section {
+    background-color: #1a1e23;
+    color: #fff;   
+}
+.skills-section .section-title{
+    color: #fff;
+    margin-bottom: 110px;  
+}
+.skills-section .section-title h2{
+    color: #fff;
+}
+.skill-title {
+    width: 25%;
+    font-size: 18px;
 }
 
 
