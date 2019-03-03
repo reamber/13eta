@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect, get_object_or_404, render
+from django.contrib.auth import logout 
 from django.urls import reverse
 from django.views import generic
 from django import forms
@@ -10,11 +11,7 @@ from match_site.models import user, role
 
 # Create your views here.
 
-#class LoginView(generic.TemplateView):
-#    template_name = 'login/login.html'
-
-logger = logging.getLogger(__name__)
-
+'''
 def getToken(request):
     users = user.objects.all();
     if request.method == "POST":
@@ -43,3 +40,8 @@ def getToken(request):
         print('new user added: ' + str(new_user))
         return response
     return HttpResponse('failed')
+'''
+
+def signout(request):
+    logout(request)
+    return HttpResponseRedirect('/')

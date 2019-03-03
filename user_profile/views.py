@@ -16,9 +16,9 @@ def getProfile(request):
         try:
             current_profile = profile.objects.get(profile_user=current_user)
             context = {
-                    'name'  :   current_user.first_name + ' ' + current_user.last_name,
+                    'name'  :   current_user.get_full_name(),
                     'img'   :   current_profile.profile_pic,
-                    'bimg' :   current_profile.profile_background_image,
+                    'bimg'  :   current_profile.profile_background_image,
                     'bio'   :   current_profile.profile_bio,
                     'edu'   :   current_profile.profile_education,
                     'intr'  :   current_profile.profile_interests,
@@ -26,14 +26,16 @@ def getProfile(request):
             }
             return render(request, template_name, context)
         except Exception as e:
-            print("No profile exists yet for this user!")
-            print(e)
             return render(request, 'user_profile/signup.html')
             
     else:
-        return HttpResponse('Not signed in')
+        return render(request, 'user_profile/profile_login.html') 
 
 def signup(request):
     template_name = 'user_profile/signup.html'
+    return render(request, template_name)
+
+def notsignedin(request):
+    template_name = 'user_profile/profile_login.html'
     return render(request, template_name)
 

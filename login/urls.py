@@ -16,6 +16,9 @@ Including another URLconf
 from django.urls import path
 from . import views
 
+app_name='login'
+
 urlpatterns = [
-    path('oauth_success', views.getToken, name="oath success" ),
+    #path('oauth_success', views.getToken, name="oath success" ),
+    path('signout', views.signout, name="signout" ),
 ]
