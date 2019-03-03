@@ -18,7 +18,7 @@ def getProfile(request):
             context = {
                     'name'  :   current_user.get_full_name(),
                     'img'   :   current_profile.profile_pic,
-                    'bimg' :   current_profile.profile_background_image,
+                    'bimg'  :   current_profile.profile_background_image,
                     'bio'   :   current_profile.profile_bio,
                     'edu'   :   current_profile.profile_education,
                     'intr'  :   current_profile.profile_interests,
