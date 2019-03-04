@@ -5,3 +5,7 @@ install:
   - pip install -r requirements.txt
 script:
   - pytest
+deploy:
+  provider: heroku
+  api_key:
+    secure: "57589eef-9982-47ab-83b4-6b9c0d24b30c"

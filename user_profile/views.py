@@ -27,9 +27,9 @@ def getProfile(request):
             return render(request, template_name, context)
         except Exception as e:
             return render(request, 'user_profile/signup.html')
-            
+
     else:
-        return render(request, 'user_profile/profile_login.html') 
+        return render(request, 'user_profile/profile_login.html')
 
 def signup(request):
     template_name = 'user_profile/signup.html'
