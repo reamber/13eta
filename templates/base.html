@@ -29,6 +29,9 @@
             <a class="nav-link" href="#">Messaging</a>
           </li>
           <li class="nav-item"> 
+            <a class="nav-link" href="/match">Match</a>
+          </li>
+          <li class="nav-item"> 
           {% if user.is_authenticated %}
             <a id="google-signin" class="nav-link" href="{% url 'login:signout' %}">Sign Out</a>
           {% else %}

@@ -7,6 +7,6 @@ from django import forms
 
 # Create your views here.
 
-class HomeView(generic.TemplateView):
-    template_name = 'match_site/index.html'
-
+def MatchView(request):
+    template_name = 'match_site/match.html'
+    return render(request, template_name)
