@@ -43,12 +43,15 @@ def getNewProfile(request):
    print('getNewProfile view called')
    #model = profile
    #NEED TO ADD SOME KIND OF ID???
-   new_profile = profile(profile_pic=request.POST['profile_pic'],
-                         profile_background_image=request.POST['profile_background'],
-                         profile_bio=request.POST['profile_bio'],
-                         profile_education=request.POST['profile_education'],
-                         profile_interests=request.POST['profile_interests'],
-                         profile_contact_info=request.POST['profile_contact_info'])
+   new_profile = profile(
+        profile_pic=request.POST['profile_pic'],
+        profile_background_image=request.POST['profile_background'],
+        profile_bio=request.POST['profile_bio'],
+        profile_education=request.POST['profile_education'],
+        profile_interests=request.POST['profile_interests'],
+        profile_contact_info=request.POST['profile_contact_info'],
+        profile_user=request.user
+    )
    new_profile.save()
    print('new profile added: ' + str(new_profile))
    return HttpResponseRedirect('/')

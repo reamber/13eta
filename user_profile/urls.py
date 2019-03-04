@@ -21,5 +21,6 @@ app_name='user_profile'
 urlpatterns = [
     path('signup', views.signup, name="User Signup"),
     path('notsignedin', views.notsignedin, name="User Sign In"),
+    path('getNewProfile', views.getNewProfile, name="Get new profile"),
     path('', views.getProfile, name="User Profile"),
 ]
