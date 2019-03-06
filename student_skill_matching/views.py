@@ -7,7 +7,6 @@ from django import forms
 import logging
 import time
 import datetime
-from match_site.models import user, role
 
 # Create your views here.
 

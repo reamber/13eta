@@ -19,5 +19,6 @@ from . import views
 app_name="match"
 
 urlpatterns = [
+    path('showprofiles', views.ShowAllProfilesView, name="Show All Profiles"),
     path('', views.MatchView, name="match" ),
 ]

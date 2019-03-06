@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div>
+
+  {% for p in profile_list %}
+    <h2>Profile:</h2>
+    <p><strong>Name: </strong> {{ p.profile_user.get_full_name }} </p>
+    <p><strong>Profile Pic: </strong> {{ p.profile_pic }} </p>
+    <p><strong>Background Pic: </strong> {{ p.profile_background_image }} </p>
+    <p><strong>Bio: </strong> {{ p.profile_bio }} </p>
+    <p><strong>Education: </strong> {{ p.profile_education }} </p>
+    <p><strong>Intrests: </strong> {{ p.profile_interests }} </p>
+    <p><strong>Contact: </strong> {{ p.profile_contact_info }} </p>
+  {% endfor %}
+
+</div>
+
+
+{% endblock %}
+

@@ -4,7 +4,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 from user_profile.models import profile
-from match_site.models import user
 
 def getProfile(request):
     model = profile
