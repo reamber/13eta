@@ -19,12 +19,14 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.views.generic.base import RedirectView
 
+from . import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', include('login.urls', namespace='login')),
     path('profile/', include('user_profile.urls', namespace='user_profile')),
     path('oauth/', include('social_django.urls', namespace='social')),
     path('match/', include('match_site.urls', namespace='match')),
-    path('', include('match_site.urls')),
+    path('', views.HomeView ),
     path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'assets/images/favicon.ico')),
 ]
