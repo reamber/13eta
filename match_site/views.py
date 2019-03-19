@@ -36,3 +36,11 @@ def CreateMatch(request):
         )
         new_match.save()
         return HttpResponse("Match created")
+        
+def ShowAllMatchesView(request):
+    template_name = 'match_site/match_list.html'
+    match_list=profile.objects.all()  
+    context={
+            "match_list":match_list
+    }
+    return render(request, template_name, context)
