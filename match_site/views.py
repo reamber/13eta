@@ -5,8 +5,8 @@ from django.views import generic
 from django import forms
 
 from match_site.models import MatchSelection
-
 from user_profile.models import profile
+from django.contrib.auth.models import User
 
 def MatchView(request):
     template_name = 'match_site/match.html'
@@ -23,10 +23,16 @@ def ShowAllProfilesView(request):
     
 def CreateMatch(request):
     #get post data from forma
-    new_match = MatchSelection(
-        user_one=request.user,
-        user_two=request.POST['matchID']
-    )
-    new_match.save()
-    print('match made?')
-    return HttpResponse()
+    try:
+        MatchSelection.objects.get(
+            user_one=request.user,
+            user_two=User.objects.get(id=request.POST['matchID'])
+        )
+        return HttpResponse("Match already exists")
+    except:
+        new_match = MatchSelection(
+            user_one=request.user,
+            user_two=User.objects.get(id=request.POST['matchID'])
+        )
+        new_match.save()
+        return HttpResponse("Match created")
