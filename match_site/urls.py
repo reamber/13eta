@@ -21,6 +21,6 @@ app_name="match"
 urlpatterns = [
     path('showprofiles', views.ShowAllProfilesView, name="Show All Profiles"),
     path('showmatches', views.MatchView, name="Show User Matches"),
-    path('creatematch', views.ShowAllMatchesView, name="Create New Match"),
+    path('creatematch', views.CreateMatch, name="Create New Match"),
     path('', views.MatchView, name="match" ),
 ]

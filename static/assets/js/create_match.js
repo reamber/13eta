@@ -11,6 +11,7 @@ $(document).ready(function(){
       }
     });
     var UserID = $(this).parent().find(".userID").text();
+    var button = $(this);
     var result = $.ajax({
       type: "POST",
       url: "/match/creatematch",
@@ -18,7 +19,14 @@ $(document).ready(function(){
         "matchID" : UserID
       },
       complete: function(data){
-
+        console.log(data.responseText);
+        if(data.responseText==="Match created"){
+          button.html("Match Pending<br/>Unmatch?");
+          button.css("background","orange");
+        }else if(data.responseText==="Match Already Exists"){
+          button.html("Match Pending<br/>Unmatch?");
+          button.css("background","orange");
+        }
       }
     });
   });
