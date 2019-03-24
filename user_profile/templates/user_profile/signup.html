@@ -6,14 +6,53 @@
 
 <form action="/profile/getNewProfile" method="post">
 {% csrf_token %}
-    Name: <input type="text" name="profile_name"><br>
-    Location of Profile Picture: <input type="text" name="profile_pic"><br>
-    Location of Background Image: <input type="text" name="profile_background"><br>
-    Enter a Short Bio: <input type="text" name="profile_bio"><br>
-    Enter Education Information: <input type="text" name="profile_education"><br>
-    Enter Your Interests: <input type="text" name="profile_interests"><br>
-    Enter Your Contact Information: <input type="text" name="profile_contact_info"><br>
+<div class = "container">
+        <div class = "row">
+            <div class="col-12">
+                    <div class="image-container">
+                        <img src = "http://placehold.it/150x150" style="width: 150px; height: 150px" class="img-thumbnail" />
+                        <div class="imageupload">
+                            <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change"/>
+                        </div>
+                    </div>
+
+                    <div class = "row">
+                            <div class="col-sm-3 col-md-2 col-5">
+                                Name: <input type="text" name="profile_name"><br>
+                            </div>
+                    </div>
+                    <hr />
+    <!-- Location of Profile Picture: <input type="text" name="profile_pic"><br> -->
+    <!-- Upload Background Image: <input type="text" name="profile_background"><br> -->
+
+                    <div class = "row">
+                            <div class="col-sm-3 col-md-2 col-5">
+                                Enter a Short Bio: <input type="text" name="profile_bio"><br>
+                            </div>
+                    </div>
+                    <hr />
+    
+                    <div class = "row">
+                            <div class="col-sm-3 col-md-2 col-5">
+                                Enter Education Information: <input type="text" name="profile_education"><br>
+                            </div>
+                    </div>
+                    <hr />
+                    <div class = "row">
+                            <div class="col-sm-3 col-md-2 col-5">
+                                    Enter Your Interests: <input type="text" name="profile_interests"><br>
+                            </div>
+                    </div>
+                    <hr />
+
+                    <div class = "row">
+                            <div class="col-sm-3 col-md-2 col-5">
+                                    Enter Your Contact Information: <input type="text" name="profile_contact_info"><br>
+                            </div>
+                    </div>
+                    <hr />
     <input type="submit" value="Signup">
+    </div>
 </form>
 
 {% endblock %}
