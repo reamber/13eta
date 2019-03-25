@@ -10,12 +10,21 @@ from user_profile.models import profile
 from django.contrib.auth.models import User
 
 def MatchView(request):
-    template_name = 'match_site/match.html'
+    template_name = ''
+    if(request.user.is_authenticated):
+        template_name = 'match_site/match.html'
+    else:
+        template_name = 'not_logged_in.html'
     return render(request, template_name)
 
 # Displays a list of all the user profiles
 def ShowAllProfilesView(request):
-    template_name = 'match_site/profile_list.html'
+    template_name = ''
+    if(request.user.is_authenticated):
+        template_name = 'match_site/profile_list.html'
+    else:
+        template_name = 'not_logged_in.html'
+    
     profile_list=list(profile.objects.exclude(profile_user=request.user))  
     match_list=MatchSelection.objects.filter(
             Q(user_one=request.user)|Q(user_two=request.user)
@@ -47,6 +56,8 @@ def CreateMatch(request):
             user_two=User.objects.get(id=request.POST['matchID'])
         )
         new_match.save()
+        if(MatchSelection.objects.filter(user_one=new_match.user_two, user_two=request.user).exists()):
+            return HttpResponse("Match completed")
         return HttpResponse("Match created")
         
 def Unmatch(request):
@@ -60,7 +71,12 @@ def Unmatch(request):
         return HttpResponse("Failed to remove match")
 
 def UserMatches(request):
-    template_name = 'match_site/user_match_list.html'
+    template_name = ''
+    if(request.user.is_authenticated):
+        template_name = 'match_site/user_match_list.html'
+    else:
+        template_name = 'not_logged_in.html'
+ 
     matches = list(MatchSelection.objects.filter(user_one=request.user))
     confirmed_matches = []
     for m in matches:
@@ -73,10 +89,19 @@ def UserMatches(request):
 
 
 def UserPendingMatches(request):
-    template_name = 'match_site/user_pending_match_list.html'
+    template_name = ''
+    if(request.user.is_authenticated):
+        template_name = 'match_site/user_pending_match_list.html'   
+    else:
+        template_name = 'not_logged_in.html'
+    matches = list(MatchSelection.objects.filter(user_one=request.user))
+    confirmed_matches = []
+    for m in matches:
+        if MatchSelection.objects.filter(user_one=m.user_two, user_two=request.user).exists():
+            confirmed_matches.append(m)
     try:
         context = {
-            "match_list": list(MatchSelection.objects.filter(user_one=request.user)),
+            "match_list": set(list(MatchSelection.objects.filter(user_one=request.user))) - set(confirmed_matches),
         }
     except:
         context = {
@@ -85,7 +110,12 @@ def UserPendingMatches(request):
     return render(request, template_name, context)
 
 def ShowAllMatchesView(request):
-    template_name = 'match_site/match_list.html'
+    template_name = ''
+    if(request.user.is_authenticated):
+        template_name = 'match_site/match_list.html'
+    else:
+        template_name = 'not_logged_in.html'
+ 
     match_list=profile.objects.all()  
     context={
             "match_list":match_list
