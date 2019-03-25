@@ -22,8 +22,6 @@ def ShowAllProfilesView(request):
     )
     
     for i in range(len(profile_list)):
-        print(list(match_list.filter(user_one=profile_list[i].profile_user)))
-        print(list(match_list.filter(user_two=profile_list[i].profile_user)))
         profile_list[i] = [
                 profile_list[i], 
                 len(list(match_list.filter(user_one=profile_list[i].profile_user)))!=0,
@@ -36,7 +34,7 @@ def ShowAllProfilesView(request):
     return render(request, template_name, context)
     
 def CreateMatch(request):
-    #get post data from forma
+    #get post data from form
     try:
         MatchSelection.objects.get(
             user_one=request.user,
@@ -60,6 +58,31 @@ def Unmatch(request):
         return HttpResponse("Match removed")
     except:
         return HttpResponse("Failed to remove match")
+
+def UserMatches(request):
+    template_name = 'match_site/user_match_list.html'
+    matches = list(MatchSelection.objects.filter(user_one=request.user))
+    confirmed_matches = []
+    for m in matches:
+        if MatchSelection.objects.filter(user_one=m.user_two, user_two=request.user).exists():
+            confirmed_matches.append(m)
+    context = {
+        "match_list": confirmed_matches,
+    }
+    return render(request, template_name, context)
+
+
+def UserPendingMatches(request):
+    template_name = 'match_site/user_pending_match_list.html'
+    try:
+        context = {
+            "match_list": list(MatchSelection.objects.filter(user_one=request.user)),
+        }
+    except:
+        context = {
+            "match_list": None
+        }
+    return render(request, template_name, context)
 
 def ShowAllMatchesView(request):
     template_name = 'match_site/match_list.html'

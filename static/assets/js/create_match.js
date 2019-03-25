@@ -12,9 +12,13 @@ $(document).ready(function(){
     });
     var UserID = $(this).parent().find(".userID").text();
     var button = $(this);
+    var view = "/match/creatematch"
+    if(button.text() == "Match PendingUnmatch?"){
+      view = "/match/removematch"
+    }
     var result = $.ajax({
       type: "POST",
-      url: "/match/creatematch",
+      url: view,
       data: {
         "matchID" : UserID
       },
@@ -26,6 +30,9 @@ $(document).ready(function(){
         }else if(data.responseText==="Match Already Exists"){
           button.html("Match Pending<br/>Unmatch?");
           button.css("background","orange");
+        }else if(data.responseText==="Match removed"){
+          button.html("Match");
+          button.css("background","")
         }
       }
     });
