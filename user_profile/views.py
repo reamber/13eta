@@ -4,7 +4,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 from user_profile.models import profile
-from match_site.models import user
 
 def getProfile(request):
     model = profile
@@ -40,9 +39,6 @@ def notsignedin(request):
     return render(request, template_name)
 
 def getNewProfile(request):
-   print('getNewProfile view called')
-   #model = profile
-   #NEED TO ADD SOME KIND OF ID???
    new_profile = profile(
         profile_pic=request.POST['profile_pic'],
         profile_background_image=request.POST['profile_background'],
@@ -53,5 +49,4 @@ def getNewProfile(request):
         profile_user=request.user
     )
    new_profile.save()
-   print('new profile added: ' + str(new_profile))
    return HttpResponseRedirect('/')

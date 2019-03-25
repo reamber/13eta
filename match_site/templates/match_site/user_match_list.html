@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div>
+    <!--script type="text/javascript" src="{% static "assets/js/create_match.js" %}"></script-->
+    <h2>Your confirmed matches</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name:</th>
+        </tr>
+      </thead>
+      {% for m in match_list %}
+      <tr>
+        <td>{{ m.user_two.get_full_name }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    
+{% endblock %}

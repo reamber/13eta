@@ -9,6 +9,6 @@ import time
 import datetime
 
 # Create your views here.
-def signout(request):
-    logout(request)
-    return HttpResponseRedirect('/')
+
+def HomeView(request):
+    return render(request, "home.html")

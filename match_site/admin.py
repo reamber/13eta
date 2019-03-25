@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-from match_site.models import user, role
+from match_site.models import MatchSelection
 # Register your models here.
-admin.site.register(user)
-admin.site.register(role)
+admin.site.register(MatchSelection)

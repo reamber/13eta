@@ -16,6 +16,13 @@ Including another URLconf
 from django.urls import path
 from . import views
 
+app_name="match"
+
 urlpatterns = [
-    path('', views.HomeView.as_view(), name="home" ),
+    path('showprofiles', views.ShowAllProfilesView, name="Show All Profiles"),
+    path('showmatches', views.UserMatches, name="Show User Matches"),
+    path('showpending', views.UserPendingMatches, name="Show User Matches"),
+    path('creatematch', views.CreateMatch, name="Create New Match"),
+    path('removematch', views.Unmatch, name="Unmatch"),
+    path('', views.MatchView, name="match" ),
 ]

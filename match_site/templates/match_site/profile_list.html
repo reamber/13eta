@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div>
+<script type="text/javascript" src="{% static "assets/js/create_match.js" %}"></script>
+
+  <div class="container">
+    <div class="row">
+      {% for p in profile_list %}
+      <div class="col-md-3">
+          <div class="card" >
+            <img src="{% static "assets/images/default_profile.png" %}" class="img-circle">
+                <p><strong>Name: </strong> {{ p.0.profile_user.get_full_name }} </p>
+                <p><strong>Bio: </strong> {{ p.0.profile_bio }} </p>
+                <p><strong>Education: </strong> {{ p.0.profile_education }} </p>
+                <p><strong>Intrests: </strong> {{ p.0.profile_interests }} </p>
+                <div class="userID" hidden>{{ p.0.profile_user.id }}</div>
+                {% if p.2 and not p.1 %}
+                <div style="background:orange" class="btn matchbutton btn-primary">Match Pending<br/>Unmatch?</div>
+                {% elif p.1 and p.2 %}
+                <div style="background:green" class="btn mtachbutton btn-primary">Matched<br/>Unmatch?</div>
+                {% else %}
+                  <div class="btn matchbutton btn-primary">Match</div>
+                {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+          
+        <!-- <h2>Profile:</h2>
+        <p><strong>Name: </strong> {{ p.profile_user.get_full_name }} </p>
+        <p><strong>Profile Pic: </strong> {{ p.profile_pic }} </p>
+        <p><strong>Background Pic: </strong> {{ p.profile_background_image }} </p> -->
+        <!-- <p><strong>Bio: </strong> {{ p.profile_bio }} </p>
+        <p><strong>Education: </strong> {{ p.profile_education }} </p>
+        <p><strong>Intrests: </strong> {{ p.profile_interests }} </p>
+        <p><strong>Contact: </strong> {{ p.profile_contact_info }} </p>
+        <div class="userID" hidden>{{ p.profile_user.id }}</div>
+        <div class="btn matchbutton btn-primary">Match</div> -->
+  </div>
+
+</div>
+
+{% endblock %}
+
