@@ -13,7 +13,7 @@ $(document).ready(function(){
     var UserID = $(this).parent().find(".userID").text();
     var button = $(this);
     var view = "/match/creatematch"
-    if(button.text() == "Match PendingUnmatch?"){
+    if(button.text() === "Match PendingUnmatch?" || button.text() === "MatchedUnmatch?"){
       view = "/match/removematch"
     }
     var result = $.ajax({
@@ -33,6 +33,9 @@ $(document).ready(function(){
         }else if(data.responseText==="Match removed"){
           button.html("Match");
           button.css("background","")
+        }else if(data.responseText==="Match completed"){
+          button.html("Matched<br/>Unmatch?");
+          button.css("background","green");
         }
       }
     });
