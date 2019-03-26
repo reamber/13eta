@@ -11,6 +11,7 @@
             <div class="col-12">
                     <div class="image-container">
                         <img src = "http://placehold.it/150x150" style="width: 150px; height: 150px" class="img-thumbnail" />
+                        <input type="text" name="profile_pic" hidden value="{% static "assets/images/default_profile.png" %}"></input>
                         <div class="imageupload">
                             <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change"/>
                         </div>
@@ -23,8 +24,15 @@
                     </div>
                     <hr />
     <!-- Location of Profile Picture: <input type="text" name="profile_pic"><br> -->
-    <!-- Upload Background Image: <input type="text" name="profile_background"><br> -->
-
+    <!-- Upload Background Image: --> 
+      
+                    <div class = "row">
+                            <div class="col-sm-3 col-md-2 col-5">
+                                Background Image URL: <input type="text" name="profile_background"><br>
+                            </div>
+                    </div>
+                    <hr />
+ 
                     <div class = "row">
                             <div class="col-sm-3 col-md-2 col-5">
                                 Enter a Short Bio: <input type="text" name="profile_bio"><br>
