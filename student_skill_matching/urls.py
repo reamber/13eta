@@ -18,6 +18,7 @@ from django.urls import include, path
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.views.generic.base import RedirectView
+from django.conf.urls.static import static
 
 from . import views
 
@@ -29,4 +30,4 @@ urlpatterns = [
     path('match/', include('match_site.urls', namespace='match')),
     path('', views.HomeView),
     path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'assets/images/favicon.ico')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

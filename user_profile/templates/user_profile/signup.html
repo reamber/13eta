@@ -4,63 +4,62 @@
 {% block content %}
 <h1>{{ "Create Your Profile" }}</h1>
 
-<form action="/profile/getNewProfile" method="post">
-{% csrf_token %}
-<div class = "container">
+<form action="/profile/getNewProfile" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class = "container">
+    <div class = "row">
+      <div class="col-12">
         <div class = "row">
-            <div class="col-12">
-                    <div class="image-container">
-                        <img src = "http://placehold.it/150x150" style="width: 150px; height: 150px" class="img-thumbnail" />
-                        <input type="text" name="profile_pic" hidden value="{% static "assets/images/default_profile.png" %}"></input>
-                        <div class="imageupload">
-                            <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change"/>
-                        </div>
-                    </div>
+          <div class="col-sm-3 col-md-2 col-5">
+          Profile Picture: 
+          <input type="file" accept="image/*" name="profile_pic" value="{% static "assets/images/default_profile.png" %}"></input>
+          </div>
+        </div>
+        <hr/>
 
-                    <div class = "row">
-                            <div class="col-sm-3 col-md-2 col-5">
-                                Name: <input type="text" name="profile_name"><br>
-                            </div>
-                    </div>
-                    <hr />
-    <!-- Location of Profile Picture: <input type="text" name="profile_pic"><br> -->
-    <!-- Upload Background Image: --> 
-      
-                    <div class = "row">
-                            <div class="col-sm-3 col-md-2 col-5">
-                                Background Image URL: <input type="text" name="profile_background"><br>
-                            </div>
-                    </div>
-                    <hr />
- 
-                    <div class = "row">
-                            <div class="col-sm-3 col-md-2 col-5">
-                                Enter a Short Bio: <input type="text" name="profile_bio"><br>
-                            </div>
-                    </div>
-                    <hr />
-    
-                    <div class = "row">
-                            <div class="col-sm-3 col-md-2 col-5">
-                                Enter Education Information: <input type="text" name="profile_education"><br>
-                            </div>
-                    </div>
-                    <hr />
-                    <div class = "row">
-                            <div class="col-sm-3 col-md-2 col-5">
-                                    Enter Your Interests: <input type="text" name="profile_interests"><br>
-                            </div>
-                    </div>
-                    <hr />
+        <div class = "row">
+          <div class="col-sm-3 col-md-2 col-5">
+            Background Image: 
+            <input type="file" accept="image/*" name="profile_background" value="{% static "assets/images/default_profile.png"><br>
+          </div>
+        </div>
+        <hr />
 
-                    <div class = "row">
-                            <div class="col-sm-3 col-md-2 col-5">
-                                    Enter Your Contact Information: <input type="text" name="profile_contact_info"><br>
-                            </div>
-                    </div>
-                    <hr />
-    <input type="submit" value="Signup">
-    </div>
+        <div class = "row">
+          <div class="col-sm-3 col-md-2 col-5">
+            Name: <input type="text" name="profile_name"><br>
+          </div>
+        </div>
+        <hr />
+
+        <div class = "row">
+          <div class="col-sm-3 col-md-2 col-5">
+            Enter a Short Bio: <input type="text" name="profile_bio"><br>
+          </div>
+        </div>
+        <hr />
+
+        <div class = "row">
+          <div class="col-sm-3 col-md-2 col-5">
+            Enter Education Information: <input type="text" name="profile_education"><br>
+          </div>
+        </div>
+        <hr />
+        <div class = "row">
+          <div class="col-sm-3 col-md-2 col-5">
+            Enter Your Interests: <input type="text" name="profile_interests"><br>
+          </div>
+        </div>
+        <hr />
+
+        <div class = "row">
+          <div class="col-sm-3 col-md-2 col-5">
+            Enter Your Contact Information: <input type="text" name="profile_contact_info"><br>
+          </div>
+        </div>
+        <hr />
+        <input type="submit" value="Signup">
+      </div>
 </form>
 
 {% endblock %}
