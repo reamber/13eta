@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 # Create your views here.
 from user_profile.models import profile
 
-def getProfile(request):
+def GetProfileView(request):
     model = profile
     template_name = 'user_profile/profile.html'
     username = None
@@ -30,15 +30,15 @@ def getProfile(request):
     else:
         return render(request, 'user_profile/profile_login.html')
 
-def signup(request):
+def SignupView(request):
     template_name = 'user_profile/signup.html'
     return render(request, template_name)
 
-def notsignedin(request):
+def NotSignedInView(request):
     template_name = 'user_profile/profile_login.html'
     return render(request, template_name)
 
-def getNewProfile(request):
+def GetNewProfileView(request):
     if request.method == 'POST':
         new_profile = profile(
             profile_pic=request.FILES['profile_pic'],
@@ -53,3 +53,40 @@ def getNewProfile(request):
         return HttpResponseRedirect('/')
     else:
         return HttpResponseForbidden("Form Error")
+
+def EditProfileView(request):
+    template_name = 'user_profile/edit.html'
+    if request.user.is_authenticated:
+        current_user = request.user
+        try:
+            current_profile = profile.objects.get(profile_user=current_user)
+            context = {
+                    'name'  :   current_user.get_full_name(),
+                    'img'   :   current_profile.profile_pic,
+                    'bimg'  :   current_profile.profile_background_image,
+                    'bio'   :   current_profile.profile_bio,
+                    'edu'   :   current_profile.profile_education,
+                    'intr'  :   current_profile.profile_interests,
+                    'cont'  :   current_profile.profile_contact_info,
+            }
+            return render(request, template_name, context)
+        except Exception as e:
+            return render(request, 'user_profile/signup.html')
+
+def SaveProfileEditsView(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            user_profile = profile.objects.get(profile_user=request.user)
+            if(request.FILES.getlist('profile_pic')):
+                user_profile.profile_pic=request.FILES['profile_pic']
+            if(request.FILES.getlist('profile_background')):
+                user_profile.profile_background_image=request.FILES['profile_background']
+            user_profile.profile_bio=request.POST['profile_bio']
+            user_profile.profile_education=request.POST['profile_education']
+            user_profile.profile_interests=request.POST['profile_interests']
+            user_profile.profile_contact_info=request.POST['profile_contact_info']
+            user_profile.save()
+            return HttpResponseRedirect('/profile')
+        else:
+            return HttpResponseForbidden("Form Error")
+    return HttpResponseRedirect('/profile')
