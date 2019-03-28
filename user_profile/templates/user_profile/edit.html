@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>{{ "Edit Your Profile" }}</h1>
+
+<script>
+  function readURL(input, id) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#'+id)
+          .attr('src', e.target.result)
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+</script>
+
+<form action="/profile/saveprofile" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class = "container">
+    <div class = "row">
+      <div class="col-12">
+        <div class = "row">
+          <div class="col-sm-3 col-md-2 col-5">
+            Profile Picture: 
+            <img class="img-thumbnail" id="pic_preview" src="{% get_media_prefix %}{{ img }}"></img>
+            <input type="file" accept="image/*" id="profile_pic" name="profile_pic" onchange="readURL(this,'pic_preview');"></input>
+          </div>
+        </div>
+        <hr/>
+
+        <div class = "row">
+          <div class="col-sm-3 col-md-2 col-5">
+            Background Image: 
+            <img class="img-thumbnail" id="bpic_preview" src="{% get_media_prefix %}{{ bimg }}"></img>
+            <input type="file" accept="image/*" name="profile_background" onchange="readURL(this,'bpic_preview');"><br>
+          </div>
+        </div>
+        <hr />
+
+        <div class = "row">
+          <div class="col-sm-3 col-md-2 col-5">
+            Name: <input type="text" name="profile_name" value="{{ name }}"><br>
+          </div>
+        </div>
+        <hr />
+
+        <div class = "row">
+          <div class="col-sm-3 col-md-2 col-5">
+            Enter a Short Bio: <input type="text" name="profile_bio" value="{{ bio }}"><br>
+          </div>
+        </div>
+        <hr />
+
+        <div class = "row">
+          <div class="col-sm-3 col-md-2 col-5">
+            Enter Education Information: <input type="text" name="profile_education" value="{{ edu }}"><br>
+          </div>
+        </div>
+        <hr />
+        <div class = "row">
+          <div class="col-sm-3 col-md-2 col-5">
+            Enter Your Interests: <input type="text" name="profile_interests" value="{{ intr }}"><br>
+          </div>
+        </div>
+        <hr />
+
+        <div class = "row">
+          <div class="col-sm-3 col-md-2 col-5">
+            Enter Your Contact Information: <input type="text" name="profile_contact_info" value="{{ cont }}"><br>
+          </div>
+        </div>
+        <hr />
+        <input type="submit" value="Submit Changes">
+      </div>
+</form>
+
+{% endblock %}

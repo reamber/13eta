@@ -19,8 +19,10 @@ from . import views
 app_name='user_profile'
 
 urlpatterns = [
-    path('signup', views.signup, name="User Signup"),
-    path('notsignedin', views.notsignedin, name="User Sign In"),
-    path('getNewProfile', views.getNewProfile, name="Get new profile"),
-    path('', views.getProfile, name="User Profile"),
+    path('signup', views.SignupView, name="User Signup"),
+    path('notsignedin', views.NotSignedInView, name="User Sign In"),
+    path('getNewProfile', views.GetNewProfileView, name="Get new profile"),
+    path('editprofile', views.EditProfileView, name="Edit profile"),
+    path('saveprofile', views.SaveProfileEditsView, name="Save edited profile"),
+    path('', views.GetProfileView, name="User Profile"),
 ]

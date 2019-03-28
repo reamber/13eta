@@ -33,4 +33,29 @@ span.buttonText {
   /* Use the Roboto font that is loaded in the <head> */
   font-family: 'Roboto', sans-serif;
 }
-//End style from https://developers.google.com/identity/sign-in/web/build-button
+/*
+ * End style from https://developers.google.com/identity/sign-in/web/build-button
+*/
+
+.profilepic{
+  max-width:200px;
+  max-height:200px;
+  margin: auto;
+}
+
+.image-container .profilepic{
+  object-fit: cover;
+  width:200px !important;
+  height:200px !important;
+  position: absolute;
+  top: 120px;
+  left: 30px;
+}
+
+.image-container .profilebackground{
+  object-fit: none;
+  width:100%;
+  height:300px;
+  margin:auto;
+  position: relative;
+}

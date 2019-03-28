@@ -3,54 +3,35 @@
 
 {% block content %}
 
-<h1> Your Profile </h1>
-<div class = "container">
-    <div class = "row">
-        <div class="col-12">
-                <div class="image-container">
-                    <p><strong>Profile Pic: </strong> {{ img }} </p>
-                    <div class="imageupload">
-                        <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change"/>
-                    </div>
-                </div>
-                
-                <div class = "row">
-                    <div class="col-sm-3 col-md-2 col-5">
-                        <p><strong>Name: </strong> {{ name }} </p>
-                    </div>
-                </div>
-                <hr />
-
-                <div class = "row">
-                        <div class="col-sm-3 col-md-2 col-5">
-                            <p><strong>Bio: </strong> {{ bio }} </p>
-                        </div>
-                </div>
-                <hr />
-
-                <div class = "row">
-                        <div class="col-sm-3 col-md-2 col-5">
-                            <p><strong>Education: </strong> {{ edu }} </p>
-                        </div>
-                </div>
-                <hr />
-
-                <div class = "row">
-                        <div class="col-sm-3 col-md-2 col-5">
-                                <p><strong>Intrests: </strong> {{ intr }} </p>
-                        </div>
-                </div>
-                <hr />
-
-                <div class = "row">
-                        <div class="col-sm-3 col-md-2 col-5">
-                                <p><strong>Contact: </strong> {{ cont }} </p>
-                        </div>
-                </div>
-                <hr />
-
-    <p><strong>Background Pic: </strong> {{ bimg }} </p>
-
+<div class="row image-container">
+  <img class="profilebackground" src="{% get_media_prefix %}{{ bimg }}"></img> 
+  <div>
+    <img class="img-thumbnail img-responsive profilepic" src="{% get_media_prefix %}{{ img }}"></img>
+  </div>
 </div>
+
+<table class = "table">
+  <tr class = "row">
+  </tr>
+  <tr>
+    <td>
+      <h1> {{name}}'s Profile 
+        <a href="/profile/editprofile" class="btn btn-primary">Edit</a>
+      </h1>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Bio: </strong> {{ bio }} </td>
+  </tr>
+  <tr>
+    <td><strong>Education: </strong> {{ edu }} </td>
+  </tr>
+  <tr>
+    <td><strong>Intrests: </strong> {{ intr }} </td>
+  </tr>
+  <tr>
+    <td><strong>Contact: </strong> {{ cont }} </td>
+  </tr>
+</table>
 
 {% endblock %}

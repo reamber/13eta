@@ -4,6 +4,7 @@ from django.test import TestCase
 from django.utils import timezone
 from django.contrib.auth import get_user, get_user_model
 from django.test import Client
+from django.contrib.auth.models import User
 
 
 class AuthTests(TestCase):

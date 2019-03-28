@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class profile(models.Model):
-    profile_pic = models.CharField(max_length=100)
-    profile_background_image = models.CharField(max_length=100)
+    profile_pic = models.ImageField(upload_to='profile_pictures')
+    profile_background_image = models.ImageField(upload_to='profile_backgrounds')
     profile_bio = models.CharField(max_length=200)
     profile_education = models.CharField(max_length=100)
     profile_interests = models.CharField(max_length=100)
