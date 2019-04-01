@@ -25,12 +25,12 @@ def ShowPotentialMatchesView(request):
     else:
         template_name = 'not_logged_in.html'
         return render(request, template_name, context)
-    
+
     profile_list=list(profile.objects.exclude(profile_user=request.user))  
     match_list=MatchSelection.objects.filter(
             Q(user_one=request.user)|Q(user_two=request.user)
     )
-    
+
     for i in range(len(profile_list)):
         if(InterestTag.objects.filter(tag_user=profile_list[i].profile_user).exists()):
             interests = list(InterestTag.objects.filter(tag_user=profile_list[i].profile_user))
@@ -43,14 +43,13 @@ def ShowPotentialMatchesView(request):
                 interests,
                 CalcMatchLevel(request, request.user, profile_list[i].profile_user)
         ]
-
     profile_list = sorted(profile_list, reverse=True, key = lambda x: x[4])
 
     context={
             "profile_list":profile_list
-    }
+            }
     return render(request, template_name, context)
-    
+
 def CalcMatchLevel(request, user, potential_match):
     user_interests = set(x.tag_name for x in InterestTag.objects.filter(tag_user=request.user))
     pm_interests = set(x.tag_name for x in InterestTag.objects.filter(tag_user=potential_match))
@@ -65,26 +64,26 @@ def CreateMatch(request):
     #get post data from form
     try:
         MatchSelection.objects.get(
-            user_one=request.user,
-            user_two=User.objects.get(id=request.POST['matchID'])
-        )
+                user_one=request.user,
+                user_two=User.objects.get(id=request.POST['matchID'])
+                )
         return HttpResponse("Match already exists")
     except:
         new_match = MatchSelection(
-            user_one=request.user,
-            user_two=User.objects.get(id=request.POST['matchID'])
-        )
+                user_one=request.user,
+                user_two=User.objects.get(id=request.POST['matchID'])
+                )
         new_match.save()
         if(MatchSelection.objects.filter(user_one=new_match.user_two, user_two=request.user).exists()):
             return HttpResponse("Match completed")
         return HttpResponse("Match created")
-        
+
 def Unmatch(request):
     try:
         MatchSelection.objects.get(
-            user_one=request.user,
-            user_two=User.objects.get(id=request.POST['matchID'])
-        ).delete()
+                user_one=request.user,
+                user_two=User.objects.get(id=request.POST['matchID'])
+                ).delete()
         return HttpResponse("Match removed")
     except:
         return HttpResponse("Failed to remove match")
@@ -95,15 +94,15 @@ def UserMatches(request):
         template_name = 'match_site/user_match_list.html'
     else:
         template_name = 'not_logged_in.html'
- 
+
     matches = list(MatchSelection.objects.filter(user_one=request.user))
     confirmed_matches = []
     for m in matches:
         if MatchSelection.objects.filter(user_one=m.user_two, user_two=request.user).exists():
             confirmed_matches.append(m)
     context = {
-        "match_list": confirmed_matches,
-    }
+            "match_list": confirmed_matches,
+            }
     return render(request, template_name, context)
 
 
@@ -115,18 +114,32 @@ def UserPendingMatches(request):
         template_name = 'not_logged_in.html'
     matches = list(MatchSelection.objects.filter(user_one=request.user))
     confirmed_matches = []
+
     for m in matches:
         if MatchSelection.objects.filter(user_one=m.user_two, user_two=request.user).exists():
             confirmed_matches.append(m)
     try:
+        match_list=list(set(list(MatchSelection.objects.filter(user_one=request.user))) - set(confirmed_matches))
+        for i in range(len(match_list)):
+            m_profile = profile.objects.get(profile_user=match_list[i].user_two)
+            if(InterestTag.objects.filter(tag_user=m_profile.profile_user).exists()):
+                interests = list(InterestTag.objects.filter(tag_user=m_profile.profile_user))
+            else:
+                interests = []
+            match_list[i] = [ 
+                    match_list[i], 
+                    [m_profile, interests]
+            ]
         context = {
-            "match_list": set(list(MatchSelection.objects.filter(user_one=request.user))) - set(confirmed_matches),
+            "match_list": match_list
         }
-    except:
+        return render(request, template_name, context)
+    except Exception as e:
+        print(e)
         context = {
-            "match_list": None
-        }
-    return render(request, template_name, context)
+                "match_list": None
+                }
+        return render(request, template_name, context)
 
 def ShowAllMatchesView(request):
     template_name = ''
@@ -134,9 +147,9 @@ def ShowAllMatchesView(request):
         template_name = 'match_site/match_list.html'
     else:
         template_name = 'not_logged_in.html'
- 
+
     match_list=profile.objects.all()  
     context={
             "match_list":match_list
-    }
+            }
     return render(request, template_name, context)
