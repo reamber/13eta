@@ -7,17 +7,37 @@
 <div>
     <!--script type="text/javascript" src="{% static "assets/js/create_match.js" %}"></script-->
     <h2>Your confirmed matches</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name:</th>
-        </tr>
-      </thead>
+    <div class="container">
+      <div class="row">
+        <!-- <thead>
+          <tr>
+            <th>Name:</th>
+          </tr>
+        </thead> -->
+
       {% for m in match_list %}
-      <tr>
-        <td>{{ m.user_two.get_full_name }}</td>
-      </tr>
+
+      <div class="col-md-3">
+        <div class="card h-100" >
+          <img src="{% get_media_prefix %}{{ m.0.profile_pic }}" class="img-circle profilepic" style = "width:150px; height:150px;">
+          <p><strong>Name: </strong>{{ m.user_two.get_full_name }} </p>
+          <p><strong>Bio: </strong> {{ m.user_two.profile_bio }} </p>
+          <p><strong>Education: </strong> {{ m.user_two.profile_education }} </p>
+          <div><strong>Interests: </strong> 
+            <div>
+              {% for tag in m.3 %}
+                <div class="interest-tag"> {{ tag.tag_name }} </div>
+              {% endfor %}
+              </div>
+            </div>
+          <p>
+
+          <div class="userID" hidden>{{ p.0.profile_user.id }}</div>
+          <div style="background:green" class="btn matchbutton btn-primary">Matched</div>
+          </div>
+          </div>
       {% endfor %}
-    </table>
+        </div>
+      </div>
     
 {% endblock %}
