@@ -27,7 +27,11 @@
     <td><strong>Education: </strong> {{ edu }} </td>
   </tr>
   <tr>
-    <td><strong>Intrests: </strong> {{ intr }} </td>
+    <td><strong>Interests: </strong> 
+        {% for tag in intr %}
+          <div class="interest-tag"> {{ tag.tag_name }} </div>
+        {% endfor %}
+    </td>
   </tr>
   <tr>
     <td><strong>Contact: </strong> {{ cont }} </td>
