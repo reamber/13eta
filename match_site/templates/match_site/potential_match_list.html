@@ -15,7 +15,14 @@
           <p><strong>Name: </strong>{{ p.0.profile_user.get_full_name }} </p>
           <p><strong>Bio: </strong> {{ p.0.profile_bio }} </p>
           <p><strong>Education: </strong> {{ p.0.profile_education }} </p>
-          <p><strong>Intrests: </strong> {{ p.0.profile_interests }} </p>
+          <div><strong>Interests: </strong> 
+            <div>
+            {% for tag in p.3 %}
+              <div class="interest-tag"> {{ tag.tag_name }} </div>
+            {% endfor %}
+            </div>
+          </div>
+          <p/>
           <div class="userID" hidden>{{ p.0.profile_user.id }}</div>
           {% if p.2 and not p.1 %}
           <div style="background:orange" class="btn matchbutton btn-primary">Match Pending<br/>Unmatch?</div>
