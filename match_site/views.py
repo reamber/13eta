@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 def MatchView(request):
     template_name = ''
     if(request.user.is_authenticated):
-        template_name = 'match_site/match.html'
+        return HttpResponseRedirect('showprofiles')
     else:
         template_name = 'not_logged_in.html'
     return render(request, template_name)
@@ -56,6 +56,8 @@ def CalcMatchLevel(request, user, potential_match):
     pm_interests = set(x.tag_name for x in InterestTag.objects.filter(tag_user=potential_match))
     #Jaccard similarity
     similar = user_interests.intersection(pm_interests)
+    if((len(user_interests)+len(pm_interests)-len(similar)) == 0):
+        return 0
     similarity_score = float(len(similar)) / (len(user_interests)+len(pm_interests)-len(similar))
     return similarity_score
 
