@@ -42,7 +42,7 @@ span.buttonText {
   max-height:150px;
   padding:1px;
   border:1px solid #021a40;
-  background-color:blue;
+  border-color:blue;
   margin: auto;
 }
 
@@ -103,4 +103,26 @@ span.buttonText {
   -moz-user-select: none; /* Firefox 2+ */
   -ms-user-select: none; /* IE 10+ */
   user-select: none; /* Standard syntax */
+}
+
+.match-menu-bar{
+  border-top: 1px solid gray; 
+  width: 100% !important;
+  max-width:100% !important;
+}
+
+.match-menu{
+  background:#343a40;
+  border-color:#343a40;
+  border-radius:0 !important;
+  color:rgb(154, 157, 160);
+  box-shadow: none !important;
+}
+
+.match-menu-selected{
+  background:#444b53;
+}
+
+.match-menu:focus, .match-menu:hover {
+  color: rgba(255,255,255,.75);
 }
