@@ -17,6 +17,7 @@
   </div>
   {% else %}
   <h2>Your confirmed matches</h2>
+  <hr class="my-4"/>
   <div class="container">
     <div class="row">
       {% for m in match_list %}
@@ -26,7 +27,7 @@
           <p><strong>Name: </strong>{{ m.0.user_two.get_full_name }} </p>
           <p><strong>Bio: </strong> {{ m.1.0.profile_bio }} </p>
           <p><strong>Education: </strong> {{ m.1.0.profile_education }} </p>
-          <div><strong>Interests: </strong> 
+          <div style="margin-bottom: auto;"><strong>Interests: </strong> 
             <div>
               {% for tag in m.1.1 %}
               <div class="interest-tag"> {{ tag.tag_name }} </div>

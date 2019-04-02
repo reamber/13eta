@@ -26,7 +26,7 @@
             <p><strong>Name: </strong>{{ p.0.profile_user.get_full_name }} </p>
             <p><strong>Bio: </strong> {{ p.0.profile_bio }} </p>
             <p><strong>Education: </strong> {{ p.0.profile_education }} </p>
-            <div><strong>Interests: </strong> 
+            <div style="margin-bottom: auto;"><strong>Interests: </strong> 
               <div>
                 {% for tag in p.3 %}
                 <div class="interest-tag"> {{ tag.tag_name }} </div>
