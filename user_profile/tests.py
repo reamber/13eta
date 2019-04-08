@@ -67,7 +67,7 @@ class ProfileTests(TestCase):
         response = self.client.get('/profile/').content.decode('utf8')
         self.assertIn("Contact: </strong> 6", str(response))
 
-    def test_user_profile_empty(self):
+    def test_user_profile_is_not_empty(self):
         self.client.login(username='profile', password='temporary')
         response = self.client.get('/profile/').content.decode('utf8')
         self.assertIsNot(response, " ", 'message')
