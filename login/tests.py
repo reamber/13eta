@@ -14,7 +14,7 @@ class AuthTests(TestCase):
         self.user = User.objects.create_user(username='temporary')
         self.user.set_password('temporary')
         self.user.save()
-        
+
     def test_login(self):
         self.assertIs(self.client.login(username='temporary', password='temporary'), True)
 

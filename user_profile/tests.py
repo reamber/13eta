@@ -61,11 +61,16 @@ class ProfileTests(TestCase):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/profile/').content.decode('utf8')
         self.assertIn("Intrests: </strong> 5", str(response))
-        
+
     def test_user_profile_template_contact(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/profile/').content.decode('utf8')
         self.assertIn("Contact: </strong> 6", str(response))
+
+    def test_user_profile_empty(self):
+        self.client.login(username='profile', password='temporary')
+        response = self.client.get('/profile/').content.decode('utf8')
+        self.assertIsNot(response, " ", 'message')
 
     def tearDown(self):
         self.user.delete()
