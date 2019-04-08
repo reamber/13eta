@@ -34,15 +34,7 @@ class MatchTests(TestCase):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/match/showpending').content.decode('utf8')
         self.assertIn("Your pending matches", str(response))
-        
+
     def tearDown(self):
         self.user.delete()
         self.profuser.delete()
-'''
-    def test_findmatches_page(self):
-        self.client.login(username="profile",password="temporary")
-        self.client.get('/match/showprofiles')
-
-        #print(response)
-        self.assertIn("Your pending matches", str(response))
-'''
