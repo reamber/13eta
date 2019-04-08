@@ -16,10 +16,10 @@ class ProfileTests(TestCase):
         User = get_user_model()
         self.user = User.objects.create_user(username='temporary',first_name="TestFirstName", last_name="TestLastName")
         self.profuser = User.objects.create_user(username='profile',first_name="TestFirstName", last_name="TestLastName")
-        
+
         self.test_profile = profile(profile_pic="1",profile_background_image="2",profile_bio="3",profile_education="4",profile_interests="5",profile_contact_info="6",profile_user=self.profuser)
         self.test_profile.save()
-        
+
         self.user.set_password('temporary')
         self.profuser.set_password('temporary')
         self.user.save()
@@ -49,8 +49,16 @@ class ProfileTests(TestCase):
     def test_user_profile_template_edu(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/profile/').content.decode('utf8')
-        self.assertIn("Education: </strong> 4", str(response)) 
+        self.assertIn("Education: </strong> 4", str(response))
+    def test_user_profile_template_interests(self):
+        self.client.login(username="profile",password="temporary")
+        response = self.client.get('/profile/').content.decode('utf8')
+        self.assertIn("Intrests: </strong> 5", str(response))
+    def test_user_profile_template_contact(self):
+        self.client.login(username="profile",password="temporary")
+        response = self.client.get('/profile/').content.decode('utf8')
+        self.assertIn("Contact: </strong> 6", str(response))
+
     def tearDown(self):
         self.user.delete()
         self.profuser.delete()
-
