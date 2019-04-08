@@ -25,15 +25,15 @@ class MatchTests(TestCase):
         self.user.save()
         self.profuser.save()
 
-    def test_matches_page(self):
+    def test_matches_page_no_matches(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/match/showmatches').content.decode('utf8')
-        self.assertIn("Your confirmed matches", str(response))
+        self.assertIn("You have no confirmed matches right now, go look for some new matches!", str(response))
 
-    def test_pendingmatches_page(self):
+    def test_pendingmatches_page_no_matches(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/match/showpending').content.decode('utf8')
-        self.assertIn("Your pending matches", str(response))
+        self.assertIn("You have no pending matches right now, go look for some new matches!", str(response))
         
     def tearDown(self):
         self.user.delete()
