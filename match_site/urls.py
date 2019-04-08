@@ -24,6 +24,6 @@ urlpatterns = [
     path('showpending', views.UserPendingMatches, name="Show User Matches"),
     path('creatematch', views.CreateMatch, name="Create New Match"),
     path('removematch', views.Unmatch, name="Unmatch"),
-    path('searchresults', views.SearchResultsView, name="Search Results"),
+    
     path('', views.MatchView, name="match" ),
 ]

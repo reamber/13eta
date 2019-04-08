@@ -184,7 +184,6 @@ def SearchResultsView(request):
         print(name)
         if query in name:
             search_results.append(i_profile)
-            print('ADDED')
     
     
     #print(search_results[0])
