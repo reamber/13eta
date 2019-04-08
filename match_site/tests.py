@@ -8,6 +8,8 @@ from django.contrib.auth.models import User
 from django.template import RequestContext
 from django.template.loader import render_to_string
 
+from user_profile.models import profile
+
 class MatchTests(TestCase):
     def setUp(self):
         self.client = Client()
@@ -23,6 +25,12 @@ class MatchTests(TestCase):
         self.user.save()
         self.profuser.save()
 
+    def test_pendingmatch(self):
+        self.client.login(username="profile",password="temporary")
+
+        response = self.client.get('/match/showprofiles').content.decode('utf8')
+
+        self.assertIn((User.objects.get(username="profile").get_full_name()), str(response))
 
     def tearDown(self):
         self.user.delete()

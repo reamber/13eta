@@ -24,13 +24,16 @@ class ProfileTests(TestCase):
         self.profuser.set_password('temporary')
         self.user.save()
         self.profuser.save()
+
     def test_guest_profile(self):
         response = self.client.get('/profile/')
         self.assertIn('You are not signed in', str(response.content))
+
     def test_user_without_profile(self):
         self.client.login(username='temporary', password='temporary')
         response = self.client.get('/profile/')
         self.assertIn('Create Your Profile', str(response.content))
+
     def test_user_with_profile(self):
         self.client.login(username='temporary', password='temporary')
         test_prof = profile(profile_bio="test_profile",profile_user=self.user)
@@ -38,22 +41,27 @@ class ProfileTests(TestCase):
         response = self.client.get('/profile/')
         self.assertIn('test_profile', str(response.content))
         test_prof.delete()
+
     def test_user_profile_template_name(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/profile/').content.decode('utf8')
         self.assertIn((User.objects.get(username="profile").get_full_name()), str(response))
+
     def test_user_profile_template_bio(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/profile/').content.decode('utf8')
         self.assertIn("Bio: </strong> 3", str(response))
+
     def test_user_profile_template_edu(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/profile/').content.decode('utf8')
         self.assertIn("Education: </strong> 4", str(response))
+
     def test_user_profile_template_interests(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/profile/').content.decode('utf8')
         self.assertIn("Intrests: </strong> 5", str(response))
+        
     def test_user_profile_template_contact(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/profile/').content.decode('utf8')
