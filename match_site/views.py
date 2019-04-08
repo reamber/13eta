@@ -164,3 +164,32 @@ def ShowAllMatchesView(request):
             "match_list":match_list
             }
     return render(request, template_name, context)
+    
+def SearchResultsView(request):
+    template_name = ''
+    if(request.user.is_authenticated):
+        template_name = 'match_site/searchresults.html'
+    else:
+        template_name = 'not_logged_in.html'
+
+    match_list=profile.objects.all()  
+    search_results = []
+    profile_list=list(profile.objects.exclude(profile_user=request.user))
+    query=request.GET['search'].lower()
+    print(query)
+
+    for i in range(len(profile_list)):
+        i_profile=profile_list[i]
+        name=i_profile.profile_user.get_full_name().lower()
+        print(name)
+        if query in name:
+            search_results.append(i_profile)
+            print('ADDED')
+    
+    
+    #print(search_results[0])
+            
+    context={
+            "search_results":search_results
+            }
+    return render(request, template_name, context)

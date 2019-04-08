@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div>
+    <script type="text/javascript" src="{% static "assets/js/create_match.js" %}"></script>
+    
+      {% for p in search_results %}
+      <div>
+        <h2>Profile:</h2>
+        <p><strong>Name: </strong> {{ p.profile_user.get_full_name }} </p>
+        <p><strong>Profile Pic: </strong> {{ p.profile_pic }} </p>
+        <p><strong>Background Pic: </strong> {{ p.profile_background_image }} </p>
+        <p><strong>Bio: </strong> {{ p.profile_bio }} </p>
+        <p><strong>Education: </strong> {{ p.profile_education }} </p>
+        <p><strong>Intrests: </strong> {{ p.profile_interests }} </p>
+        <p><strong>Contact: </strong> {{ p.profile_contact_info }} </p>
+        <div class="userID" hidden>{{ p.profile_user.id }}</div>
+        <div class="btn matchbutton btn-primary">Match</div>
+      </div>
+      {% endfor %}
+    
+    </div>
+    
+{% endblock %}
