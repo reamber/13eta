@@ -23,7 +23,7 @@ def SearchResultsView(request):
 
     match_list=profile.objects.all()  
     search_results = []
-    profile_list=list(profile.objects.exclude(profile_user=request.user))
+    profile_list=list(profile.objects.all())
     query=request.GET['search'].lower()
     print(query)
 
@@ -36,4 +36,5 @@ def SearchResultsView(request):
     context={
             "search_results":search_results
             }
+    print( context)
     return render(request, template_name, context)
