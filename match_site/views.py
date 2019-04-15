@@ -164,3 +164,5 @@ def ShowAllMatchesView(request):
             "match_list":match_list
             }
     return render(request, template_name, context)
+    
+

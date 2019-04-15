@@ -28,6 +28,7 @@ urlpatterns = [
     path('profile/', include('user_profile.urls', namespace='user_profile')),
     path('oauth/', include('social_django.urls', namespace='social')),
     path('match/', include('match_site.urls', namespace='match')),
+    path('searchresults', views.SearchResultsView, name="Search Results"),
     path('', views.HomeView),
     path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'assets/images/favicon.ico')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
