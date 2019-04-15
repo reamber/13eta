@@ -24,7 +24,7 @@ def ShowPotentialMatchesView(request):
         template_name = 'match_site/potential_match_list.html'
     else:
         template_name = 'not_logged_in.html'
-        return render(request, template_name, context)
+        return render(request, template_name)
 
     profile_list=list(profile.objects.exclude(profile_user=request.user))  
     match_list=MatchSelection.objects.filter(
