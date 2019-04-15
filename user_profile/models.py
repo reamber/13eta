@@ -7,9 +7,11 @@ class profile(models.Model):
     profile_pic = models.ImageField(upload_to='profile_pictures')
     profile_background_image = models.ImageField(upload_to='profile_backgrounds')
     profile_bio = models.CharField(max_length=200)
-    profile_education = models.CharField(max_length=100)
+    profile_year = models.CharField(max_length=100,default="")
+    profile_major = models.CharField(max_length=100, default="")
     profile_interests = models.CharField(max_length=100)
-    profile_contact_info = models.CharField(max_length=100)
+    profile_email = models.CharField(max_length=100, default="no email provided")
+    profile_phone = models.CharField(max_length=100, default="")
     #ADD MODEL FOR TAGS TO RELATE USERS
     profile_user = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):

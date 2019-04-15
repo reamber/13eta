@@ -18,7 +18,7 @@ class MatchTests(TestCase):
         self.user = User.objects.create_user(username='temporary',first_name="TestFirstName", last_name="TestLastName")
         self.profuser = User.objects.create_user(username='profile',first_name="TestFirstName", last_name="TestLastName")
 
-        self.test_profile = profile(profile_pic="1",profile_background_image="2",profile_bio="3",profile_education="4",profile_interests="5",profile_contact_info="6",profile_user=self.profuser)
+        self.test_profile = profile(profile_pic="1",profile_background_image="2",profile_bio="3",profile_year="4",profile_major="4",profile_interests="5",profile_phone="6",profile_email="6",profile_user=self.profuser)
         self.test_prof2 = profile(profile_user=self.user)
 
         self.test_profile.save()
