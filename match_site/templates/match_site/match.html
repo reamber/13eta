@@ -1,14 +1,20 @@
-{% extends "base.html" %}
-{% load static %}
 
-{% block content %}
-
-<div class="container">
+<div class="container match-menu-bar">
   <div class="row">
-    <a href="showprofiles" class="col-md-4 btn btn-primary">Find a Match</a>
-    <a href="showmatches" style="background:green" class="col-md-4 btn btn-primary">See my Matches</a>
-    <a href="showpending" style="background:orange" class="col-md-4 btn btn-primary">See pending Matches</a>
+    {% if request.path == "/match/showprofiles" %}
+    <a href="showprofiles" class="match-menu match-menu-selected col-md-4 btn">Find a Match</a>
+    <a href="showmatches" class="match-menu col-md-4 btn">See my Matches</a>
+    <a href="showpending" class="match-menu col-md-4 btn">See pending Matches</a>
+    {% elif request.path == "/match/showmatches" %}
+    <a href="showprofiles" class="match-menu col-md-4 btn">Find a Match</a>
+    <a href="showmatches" class="match-menu match-menu-selected col-md-4 btn">See my Matches</a>
+    <a href="showpending" class="match-menu col-md-4 btn">See pending Matches</a>
+    {% elif request.path == "/match/showpending" %}
+    <a href="showprofiles" class="match-menu col-md-4 btn">Find a Match</a>
+    <a href="showmatches" class="match-menu col-md-4 btn">See my Matches</a>
+    <a href="showpending" class="match-menu match-menu-selected col-md-4 btn">See pending Matches</a>
+    {% endif %} 
   </div>
 </div>
-{% endblock %}
+<br/>
 

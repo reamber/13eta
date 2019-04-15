@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.template import RequestContext
 from django.template.loader import render_to_string
 
-from user_profile.models import profile
+from user_profile.models import profile, InterestTag
 
 class ProfileTests(TestCase):
     def setUp(self):
@@ -17,13 +17,17 @@ class ProfileTests(TestCase):
         self.user = User.objects.create_user(username='temporary',first_name="TestFirstName", last_name="TestLastName")
         self.profuser = User.objects.create_user(username='profile',first_name="TestFirstName", last_name="TestLastName")
 
-        self.test_profile = profile(profile_pic="1",profile_background_image="2",profile_bio="3",profile_education="4",profile_interests="5",profile_contact_info="6",profile_user=self.profuser)
+        self.test_profile = profile(profile_pic="1",profile_background_image="2",profile_bio="3",profile_education="4",profile_contact_info="6",profile_user=self.profuser)
+
         self.test_profile.save()
 
         self.user.set_password('temporary')
         self.profuser.set_password('temporary')
         self.user.save()
         self.profuser.save()
+
+        self.intTag = InterestTag(tag_name="TestInterest", tag_user=self.profuser)
+        self.intTag.save()
 
     def test_guest_profile(self):
         response = self.client.get('/profile/')
@@ -60,7 +64,7 @@ class ProfileTests(TestCase):
     def test_user_profile_template_interests(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/profile/').content.decode('utf8')
-        self.assertIn("Intrests: </strong> 5", str(response))
+        self.assertIn("TestInterest", str(response))
 
     def test_user_profile_template_contact(self):
         self.client.login(username="profile",password="temporary")
@@ -73,5 +77,7 @@ class ProfileTests(TestCase):
         self.assertIsNot(response, " ", 'message')
 
     def tearDown(self):
+        self.test_profile.delete()
+        self.intTag.delete()
         self.user.delete()
         self.profuser.delete()

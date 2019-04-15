@@ -19,7 +19,7 @@ from . import views
 app_name="match"
 
 urlpatterns = [
-    path('showprofiles', views.ShowAllProfilesView, name="Show All Profiles"),
+    path('showprofiles', views.ShowPotentialMatchesView, name="Show Potential Match Profiles"),
     path('showmatches', views.UserMatches, name="Show User Matches"),
     path('showpending', views.UserPendingMatches, name="Show User Matches"),
     path('creatematch', views.CreateMatch, name="Create New Match"),

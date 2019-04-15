@@ -9,6 +9,7 @@ from django.template import RequestContext
 from django.template.loader import render_to_string
 
 from user_profile.models import profile
+from match_site.models import MatchSelection
 
 class MatchTests(TestCase):
     def setUp(self):
@@ -18,23 +19,27 @@ class MatchTests(TestCase):
         self.profuser = User.objects.create_user(username='profile',first_name="TestFirstName", last_name="TestLastName")
 
         self.test_profile = profile(profile_pic="1",profile_background_image="2",profile_bio="3",profile_education="4",profile_interests="5",profile_contact_info="6",profile_user=self.profuser)
+        self.test_prof2 = profile(profile_user=self.user)
+
         self.test_profile.save()
+        self.test_prof2.save()
 
         self.user.set_password('temporary')
         self.profuser.set_password('temporary')
         self.user.save()
         self.profuser.save()
 
-    def test_matches_page(self):
+    def test_matches_page_no_matches(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/match/showmatches').content.decode('utf8')
-        self.assertIn("Your confirmed matches", str(response))
+        self.assertIn("You have no confirmed matches right now, go look for some new matches!", str(response))
 
-    def test_pendingmatches_page(self):
+    def test_pendingmatches_page_no_matches(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/match/showpending').content.decode('utf8')
         self.assertIn("Your pending matches", str(response))
 
+        
     def tearDown(self):
         self.user.delete()
         self.profuser.delete()

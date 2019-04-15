@@ -35,19 +35,28 @@ span.buttonText {
 }
 /*
  * End style from https://developers.google.com/identity/sign-in/web/build-button
-*/
+ */
 
 .profilepic{
-  max-width:200px;
-  max-height:200px;
-  margin: auto;
+  width:150px;
+  height:150px;
+  padding:1px;
+  border:1px solid #021a40;
+  border-color:blue;
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: cover;
 }
 
 .image-container .profilepic{
   object-fit: cover;
+  max-width:200px;
+  max-height:200px;
   width:200px !important;
   height:200px !important;
   position: absolute;
+  padding:0px !important;
+  border:0px !important;
   top: 120px;
   left: 30px;
 }
@@ -58,4 +67,64 @@ span.buttonText {
   height:300px;
   margin:auto;
   position: relative;
+}
+
+.interest-box{
+  background: lightgray; 
+  padding: 5px;
+  margin:auto;
+}
+
+.interest-tag{
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+  text-align: center;
+  border-radius: 3px;
+  border-style: solid;
+  white-space: nowrap;
+  background: #007bff;
+  border-color: #007bff;
+  font-weight: bold;
+  color: white;
+}
+
+.tag-x{
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+  text-align: center;
+  border-radius: 0px 3px 3px 0px;
+  border-style: solid;
+  white-space: nowrap;
+  background: #429bff;
+  border-color: #429bff;
+  color: white !important;
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Standard syntax */
+}
+
+.match-menu-bar{
+  border-top: 1px solid gray; 
+  width: 100% !important;
+  max-width:100% !important;
+}
+
+.match-menu{
+  background:#343a40;
+  border-color:#343a40;
+  border-radius:0 !important;
+  color:rgb(154, 157, 160);
+  box-shadow: none !important;
+}
+
+.match-menu-selected{
+  background:#444b53;
+}
+
+.match-menu:focus, .match-menu:hover {
+  color: rgba(255,255,255,.75);
 }

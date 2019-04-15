@@ -3,7 +3,7 @@ from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
-from user_profile.models import profile
+from user_profile.models import profile, InterestTag
 
 def GetProfileView(request):
     model = profile
@@ -14,13 +14,17 @@ def GetProfileView(request):
         username = request.user.username
         try:
             current_profile = profile.objects.get(profile_user=current_user)
+            if(InterestTag.objects.filter(tag_user=current_user).exists()):
+                interests = list(InterestTag.objects.filter(tag_user=current_user))
+            else:
+                interests = []
             context = {
                     'name'  :   current_user.get_full_name(),
                     'img'   :   current_profile.profile_pic,
                     'bimg'  :   current_profile.profile_background_image,
                     'bio'   :   current_profile.profile_bio,
                     'edu'   :   current_profile.profile_education,
-                    'intr'  :   current_profile.profile_interests,
+                    'intr'  :   interests,
                     'cont'  :   current_profile.profile_contact_info,
             }
             return render(request, template_name, context)
@@ -60,13 +64,17 @@ def EditProfileView(request):
         current_user = request.user
         try:
             current_profile = profile.objects.get(profile_user=current_user)
+            if(InterestTag.objects.filter(tag_user=current_user).exists()):
+                interests = ', '.join(x.tag_name for x in list(InterestTag.objects.filter(tag_user=current_user)))
+            else:
+                interests = ''
             context = {
                     'name'  :   current_user.get_full_name(),
                     'img'   :   current_profile.profile_pic,
                     'bimg'  :   current_profile.profile_background_image,
                     'bio'   :   current_profile.profile_bio,
                     'edu'   :   current_profile.profile_education,
-                    'intr'  :   current_profile.profile_interests,
+                    'intr'  :   interests,
                     'cont'  :   current_profile.profile_contact_info,
             }
             return render(request, template_name, context)
@@ -83,9 +91,20 @@ def SaveProfileEditsView(request):
                 user_profile.profile_background_image=request.FILES['profile_background']
             user_profile.profile_bio=request.POST['profile_bio']
             user_profile.profile_education=request.POST['profile_education']
-            user_profile.profile_interests=request.POST['profile_interests']
             user_profile.profile_contact_info=request.POST['profile_contact_info']
             user_profile.save()
+            prev_tags = InterestTag.objects.filter(tag_user=request.user)
+            new_tags = []
+            for interest in request.POST['profile_interests'].split(','):
+                interest = interest.strip()
+                if not prev_tags.filter(tag_user=request.user, tag_name__iexact=interest).exists():
+                    new_tags.append(InterestTag(tag_user=request.user, tag_name=interest.upper()))
+                else:
+                    prev_tags = prev_tags.exclude(tag_user=request.user, tag_name__iexact=interest)
+            for ptag in prev_tags:
+                ptag.delete()
+            for ntag in new_tags:
+                ntag.save()
             return HttpResponseRedirect('/profile')
         else:
             return HttpResponseForbidden("Form Error")
