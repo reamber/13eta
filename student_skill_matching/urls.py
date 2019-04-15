@@ -21,7 +21,6 @@ from django.views.generic.base import RedirectView
 from django.conf.urls.static import static
 
 from . import views
-from match_site import views as match_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,7 +28,7 @@ urlpatterns = [
     path('profile/', include('user_profile.urls', namespace='user_profile')),
     path('oauth/', include('social_django.urls', namespace='social')),
     path('match/', include('match_site.urls', namespace='match')),
-    path('searchresults', match_views.SearchResultsView, name="Search Results"),
+    path('searchresults', views.SearchResultsView, name="Search Results"),
     path('', views.HomeView),
     path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'assets/images/favicon.ico')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
