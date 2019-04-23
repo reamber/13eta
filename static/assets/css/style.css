@@ -1,4 +1,5 @@
-//From https://developers.google.com/identity/sign-in/web/build-button
+/* From https://developers.google.com/identity/sign-in/web/build-button */
+
 #customBtn {
   display: inline-block;
   background: white;
@@ -9,6 +10,7 @@
   box-shadow: 1px 1px 1px grey;
   white-space: nowrap;
 }
+
 #customBtn:hover {
   cursor: pointer;
 }
@@ -36,6 +38,23 @@ span.buttonText {
 /*
  * End style from https://developers.google.com/identity/sign-in/web/build-button
  */
+
+ .carousel-control-next {
+  filter: invert(100%);
+}
+
+/* .carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 55px;
+  color: red;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 55px;
+  color: red;
+} */
 
 .profilepic{
   width:150px;
