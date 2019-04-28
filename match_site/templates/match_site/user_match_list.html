@@ -35,7 +35,9 @@
               {% endfor %}
             </div>
           </div>
-          <p><strong>Connect with them now: </strong> {{ m.1.0.profile_contact_info }} </p>
+          <p><strong>Connect with them now: </strong> </p>
+          <p>Phone: {{ m.1.0.profile_phone }} </p>
+          <p>Email: {{ m.1.0.profile_email }} </p>
           <div class="userID" hidden>{{ m.1.0.profile_user.id }}</div>
           <div style="background:green" class="btn matchbutton btn-primary">Matched<br/>Unmatch?</div>
         </div>
