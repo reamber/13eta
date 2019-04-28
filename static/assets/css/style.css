@@ -78,6 +78,7 @@ span.buttonText {
   border:0px !important;
   top: 120px;
   left: 30px;
+  border-radius: .5em;
 }
 
 .image-container .profilebackground{
@@ -102,8 +103,8 @@ span.buttonText {
   border-radius: 3px;
   border-style: solid;
   white-space: nowrap;
-  background: #007bff;
-  border-color: #007bff;
+  background: #8d917e;
+  border-color: #8d917e;
   font-weight: bold;
   color: white;
 }
@@ -146,4 +147,8 @@ span.buttonText {
 
 .match-menu:focus, .match-menu:hover {
   color: rgba(255,255,255,.75);
+}
+
+.col-md-3{
+  margin-top:10px !important;
 }

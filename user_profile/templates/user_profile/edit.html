@@ -23,8 +23,8 @@
     <div class = "row">
       <div class="col-12">
         <div class = "row">
-          <div class="col-sm-3 col-md-2 col-5">
-            Profile Picture: 
+          <div class="col-5">
+            Profile Picture:<br/> 
             <img class="img-thumbnail" id="pic_preview" src="{% get_media_prefix %}{{ img }}"></img>
             <input type="file" accept="image/*" id="profile_pic" name="profile_pic" onchange="readURL(this,'pic_preview');"></input>
           </div>
@@ -32,7 +32,7 @@
         <hr/>
 
         <div class = "row">
-          <div class="col-sm-3 col-md-2 col-5">
+          <div class="col-5">
             Background Image: 
             <img class="img-thumbnail" id="bpic_preview" src="{% get_media_prefix %}{{ bimg }}"></img>
             <input type="file" accept="image/*" name="profile_background" onchange="readURL(this,'bpic_preview');"><br>
@@ -41,52 +41,51 @@
         <hr />
 
         <div class = "row">
-          <div class="col-sm-3 col-md-2 col-5">
-            Name: <input type="text" name="profile_name" value="{{ name }}"><br>
+          <div class="col-5">
+            Name: <br>
           </div>
         </div>
+        <input style="width:100%" type="text" name="profile_name" value="{{ name }}"/>
         <hr />
 
         <div class = "row">
-          <div class="col-sm-3 col-md-2 col-5">
-            Enter a Short Bio: <input type="text" name="profile_bio" value="{{ bio }}"><br>
+          <div class="col-5">
+            Enter a Short Bio: <br>
           </div>
         </div>
+        <input style="width:100%" type="text" name="profile_bio" value="{{ bio }}">
         <hr />
 
         <div class = "row">
-          <div class="col-sm-3 col-md-2 col-5">
-            Enter Your Year: <input type="text" name="profile_year" value="{{ year }}"><br>
+          <div class="col-5">
+            Enter Your Year: <br>
           </div>
         </div>
+        <input style="width:100%" type="text" name="profile_year" value="{{ year }}">
         <hr />
 
         <div class = "row">
-          <div class="col-sm-3 col-md-2 col-5">
-            Enter Your Major: <input type="text" name="profile_major" value="{{ major }}"><br>
+          <div class="col-5">
+            Enter Your Major: <br>
           </div>
         </div>
+        <input style="width:100%"  type="text" name="profile_major" value="{{ major }}">
         <hr />
 
         <div class = "row">
-          <div class="col-sm-3 col-md-2 col-5">
-            Enter Your Interests (seperated by commas): <input type="text" name="profile_interests" value="{{ intr }}"><br>
+          <div class="col-5">
+            Enter Your Interests (seperated by commas): <br>
           </div>
         </div>
+        <input style="width:100%" type="text" name="profile_interests" value="{{ intr }}">
         <hr />
 
         <div class = "row">
-          <div class="col-sm-3 col-md-2 col-5">
-            Enter Your Email: <input type="text" name="profile_email" value="{{ cont }}"><br>
+          <div class="col-5">
+            Enter Your Phone Number: <br>
           </div>
         </div>
-        <hr />
-
-        <div class = "row">
-          <div class="col-sm-3 col-md-2 col-5">
-            Enter Your Phone Number: <input type="text" name="profile_email" value="{{ cont }}"><br>
-          </div>
-        </div>
+        <input style="width:100%" type="text" name="profile_phone" value="{{ phone }}">
         <hr />
 
         <input type="submit" value="Submit Changes">

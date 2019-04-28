@@ -37,14 +37,14 @@ class MatchTests(TestCase):
     def test_pendingmatches_page_no_matches(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/match/showpending').content.decode('utf8')
-        self.assertIn("You have no pending matches right now, go look for some new matches!", str(response))
+        self.assertIn("You have no match requests right now, go look for some new matches!", str(response))
         
     def test_pendingmatches_page_with_matches(self):
         self.m = MatchSelection(user_one=self.profuser,user_two=self.user)
         self.m.save()
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/match/showpending').content.decode('utf8')
-        self.assertIn("Your pending matches", str(response))
+        self.assertIn("Your match requests", str(response))
  
     def test_matches_page_with_matches(self):
         m1 = MatchSelection(user_one=self.profuser,user_two=self.user)
@@ -58,12 +58,3 @@ class MatchTests(TestCase):
     def tearDown(self):
         self.user.delete()
         self.profuser.delete()
-
-'''
-    def test_findmatches_page(self):
-        self.client.login(username="profile",password="temporary")
-        self.client.get('/match/showprofiles')
-
-        #print(response)
-        self.assertIn("Your pending matches", str(response))
-'''
