@@ -56,20 +56,30 @@ class ProfileTests(TestCase):
         response = self.client.get('/profile/').content.decode('utf8')
         self.assertIn("Bio: </strong> 3", str(response))
 
-    def test_user_profile_template_edu(self):
+    def test_user_profile_template_year(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/profile/').content.decode('utf8')
-        self.assertIn("Education: </strong> 4", str(response))
+        self.assertIn("Year: </strong> 4", str(response))
+
+    def test_user_profile_template_major(self):
+        self.client.login(username="profile",password="temporary")
+        response = self.client.get('/profile/').content.decode('utf8')
+        self.assertIn("Major: </strong> 4", str(response))
 
     def test_user_profile_template_interests(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/profile/').content.decode('utf8')
         self.assertIn("TestInterest", str(response))
 
-    def test_user_profile_template_contact(self):
+    def test_user_profile_template_email(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/profile/').content.decode('utf8')
-        self.assertIn("Contact: </strong> 6", str(response))
+        self.assertIn("Email: </strong> 6", str(response))
+
+    def test_user_profile_template_phone(self):
+        self.client.login(username="profile",password="temporary")
+        response = self.client.get('/profile/').content.decode('utf8')
+        self.assertIn("Phone: </strong> 6", str(response))
 
     def test_user_profile_is_not_empty(self):
         self.client.login(username='profile', password='temporary')
