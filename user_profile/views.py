@@ -23,9 +23,11 @@ def GetProfileView(request):
                     'img'   :   current_profile.profile_pic,
                     'bimg'  :   current_profile.profile_background_image,
                     'bio'   :   current_profile.profile_bio,
-                    'edu'   :   current_profile.profile_education,
+                    'major' :   current_profile.profile_year,
+                    'year'  :   current_profile.profile_major,
                     'intr'  :   interests,
-                    'cont'  :   current_profile.profile_contact_info,
+                    'phone'  :   current_profile.profile_phone,
+                    'email'  :   current_profile.profile_email,
             }
             return render(request, template_name, context)
         except Exception as e:
@@ -48,9 +50,10 @@ def GetNewProfileView(request):
             profile_pic=request.FILES['profile_pic'],
             profile_background_image=request.FILES['profile_background'],
             profile_bio=request.POST['profile_bio'],
-            profile_education=request.POST['profile_education'],
-            profile_interests=request.POST['profile_interests'],
-            profile_contact_info=request.POST['profile_contact_info'],
+            profile_year=request.POST['profile_year'],
+            profile_major=request.POST['profile_major'],
+            profile_email=request.user.email,
+            profile_phone=request.POST['profile_phone'],
             profile_user=request.user
         )
         new_profile.save()
@@ -73,9 +76,11 @@ def EditProfileView(request):
                     'img'   :   current_profile.profile_pic,
                     'bimg'  :   current_profile.profile_background_image,
                     'bio'   :   current_profile.profile_bio,
-                    'edu'   :   current_profile.profile_education,
+                    'major' :   current_profile.profile_major,
+                    'year'  :   current_profile.profile_year,
                     'intr'  :   interests,
-                    'cont'  :   current_profile.profile_contact_info,
+                    'email'  :   current_profile.profile_email,
+                    'phone'  :   current_profile.profile_phone,
             }
             return render(request, template_name, context)
         except Exception as e:
@@ -90,8 +95,9 @@ def SaveProfileEditsView(request):
             if(request.FILES.getlist('profile_background')):
                 user_profile.profile_background_image=request.FILES['profile_background']
             user_profile.profile_bio=request.POST['profile_bio']
-            user_profile.profile_education=request.POST['profile_education']
-            user_profile.profile_contact_info=request.POST['profile_contact_info']
+            user_profile.profile_major=request.POST['profile_major']
+            user_profile.profile_year=request.POST['profile_year']
+            user_profile.profile_phone=request.POST['profile_phone']
             user_profile.save()
             prev_tags = InterestTag.objects.filter(tag_user=request.user)
             new_tags = []

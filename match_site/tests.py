@@ -18,7 +18,7 @@ class MatchTests(TestCase):
         self.user = User.objects.create_user(username='temporary',first_name="TestFirstName", last_name="TestLastName")
         self.profuser = User.objects.create_user(username='profile',first_name="TestFirstName", last_name="TestLastName")
 
-        self.test_profile = profile(profile_pic="1",profile_background_image="2",profile_bio="3",profile_education="4",profile_interests="5",profile_contact_info="6",profile_user=self.profuser)
+        self.test_profile = profile(profile_pic="1",profile_background_image="2",profile_bio="3",profile_year="4",profile_major="4",profile_interests="5",profile_phone="6",profile_email="6",profile_user=self.profuser)
         self.test_prof2 = profile(profile_user=self.user)
 
         self.test_profile.save()
@@ -37,14 +37,14 @@ class MatchTests(TestCase):
     def test_pendingmatches_page_no_matches(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/match/showpending').content.decode('utf8')
-        self.assertIn("You have no pending matches right now, go look for some new matches!", str(response))
+        self.assertIn("You have no match requests right now, go look for some new matches!", str(response))
         
     def test_pendingmatches_page_with_matches(self):
         self.m = MatchSelection(user_one=self.profuser,user_two=self.user)
         self.m.save()
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/match/showpending').content.decode('utf8')
-        self.assertIn("Your pending matches", str(response))
+        self.assertIn("Your match requests", str(response))
  
     def test_matches_page_with_matches(self):
         m1 = MatchSelection(user_one=self.profuser,user_two=self.user)
@@ -58,12 +58,3 @@ class MatchTests(TestCase):
     def tearDown(self):
         self.user.delete()
         self.profuser.delete()
-
-'''
-    def test_findmatches_page(self):
-        self.client.login(username="profile",password="temporary")
-        self.client.get('/match/showprofiles')
-
-        #print(response)
-        self.assertIn("Your pending matches", str(response))
-'''

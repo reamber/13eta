@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div>
+  <script type="text/javascript" src="{% static "assets/js/create_match.js" %}"></script>
+  <br/>
+  <div class="container">
+    <div class="row">
+      {% if not search_results %}
+      <div class="container">
+        <h2 style="text-align:center;">
+          No Results Match Your Query
+        </h2>
+      </div>
+      {% else %}
+      {% for p in search_results %}
+      <div class="col-md-3">
+        <div class="card h-100" >
+          <img src="{% get_media_prefix %}{{ p.profile_pic }}" class="img-circle profilepic" style = "width:150px; height:150px;">
+          <p><strong>Name: </strong>{{ p.profile_user.get_full_name }} </p>
+          <p><strong>Bio: </strong> {{ p.profile_bio }} </p>
+          <p><strong>Year: </strong> {{ p.profile_year}} </p>
+          <p><strong>Major: </strong> {{ p.profile_major }} </p>
+
+          <div style="margin-bottom: auto;"><strong>Interests: </strong> 
+            <div>
+              {% for tag in p.get_interests %}
+              <div class="interest-tag"> {{ tag.tag_name }} </div>
+              {% endfor %}
+            </div>
+          </div>
+          <p/>
+          <div class="userID" hidden>{{ p.0.profile_user.id }}</div>
+          {% if p.2 and not p.1 %}
+          <div style="background:orange" class="btn matchbutton btn-primary">Match Pending<br/>Unmatch?</div>
+          {% elif p.1 and p.2 %}
+          <div style="background:green" class="btn matchbutton btn-primary">Matched<br/>Unmatch?</div>
+          {% else %}
+          <div style="line-height:48px" class="btn matchbutton btn-primary">Match</div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+
+  </div>
+
+  {% endblock %}
