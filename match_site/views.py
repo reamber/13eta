@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.views import generic
 from django import forms
 from django.db.models import Q
-
+from django.core.mail import send_mail
 from match_site.models import MatchSelection
 from user_profile.models import profile, InterestTag
 from django.contrib.auth.models import User
@@ -26,7 +26,7 @@ def ShowPotentialMatchesView(request):
         template_name = 'not_logged_in.html'
         return render(request, template_name)
 
-    profile_list=list(profile.objects.exclude(profile_user=request.user))  
+    profile_list=list(profile.objects.exclude(profile_user=request.user).exclude(profile_perm_view=False))  
     match_list=MatchSelection.objects.filter(
             Q(user_one=request.user)|Q(user_two=request.user)
     )
@@ -76,10 +76,23 @@ def CreateMatch(request):
                 )
         new_match.save()
         if(MatchSelection.objects.filter(user_one=new_match.user_two, user_two=request.user).exists()):
+            if(profile.objects.get(profile_user=new_match.user_two).profile_perm_notify):
+                print("emailing " + new_match.user_one.get_full_name())
+                send_mail(
+                    'New match with ' + new_match.user_one.get_full_name()  + '!',
+                    'Check out your new confirmed match at https://student-skill-match-cs3240.herokuapp.com/match/showmatches\n\nThanks,\nFrom Team 13eta',
+                    '13eta3240@gmail.com',
+                    [new_match.user_two.email],
+                    fail_silently=False,
+                )
             return HttpResponse("Match completed")
         return HttpResponse("Match created")
 
 def Unmatch(request):
+    if not request.user.is_authenticated:
+        template_name = 'not_logged_in.html'
+        return render(request, template_name)
+
     try:
         MatchSelection.objects.get(
                 user_one=request.user,
@@ -95,7 +108,7 @@ def UserMatches(request):
         template_name = 'match_site/user_match_list.html'
     else:
         template_name = 'not_logged_in.html'
-        return render(request, template_name, context)
+        return render(request, template_name)
 
     matches = list(MatchSelection.objects.filter(user_one=request.user))
     confirmed_matches = []
@@ -105,6 +118,9 @@ def UserMatches(request):
     match_list=confirmed_matches
     for i in range(len(match_list)):
         m_profile = profile.objects.get(profile_user=match_list[i].user_two)
+        if not m_profile.profile_perm_view:
+            match_list.remove(match_list[i])
+            continue
         if(InterestTag.objects.filter(tag_user=m_profile.profile_user).exists()):
             interests = list(InterestTag.objects.filter(tag_user=m_profile.profile_user))
         else:
@@ -124,6 +140,7 @@ def UserPendingMatches(request):
         template_name = 'match_site/user_pending_match_list.html'   
     else:
         template_name = 'not_logged_in.html'
+        return render(request, template_name)
     matches = list(MatchSelection.objects.filter(user_one=request.user))
     confirmed_matches = []
 
@@ -134,6 +151,10 @@ def UserPendingMatches(request):
         match_list=list(set(list(MatchSelection.objects.filter(user_one=request.user))) - set(confirmed_matches))
         for i in range(len(match_list)):
             m_profile = profile.objects.get(profile_user=match_list[i].user_two)
+            if not m_profile.profile_perm_view:
+                match_list.remove(match_list[i])
+                continue 
+
             if(InterestTag.objects.filter(tag_user=m_profile.profile_user).exists()):
                 interests = list(InterestTag.objects.filter(tag_user=m_profile.profile_user))
             else:
@@ -159,8 +180,9 @@ def ShowAllMatchesView(request):
         template_name = 'match_site/match_list.html'
     else:
         template_name = 'not_logged_in.html'
+        return render(request, template_name)
 
-    match_list=profile.objects.all()  
+    match_list=profile.objects.all().exclude(profile_perm_view=False)  
     context={
             "match_list":match_list
             }

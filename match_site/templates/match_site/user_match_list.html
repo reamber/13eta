@@ -35,12 +35,18 @@
               {% endfor %}
             </div>
           </div>
+
+          <hr/>
+
+          {%if m.1.0.profile_perm_phone and not m.1.0.profile_phone == "" %}
+          <p><strong>Phone:</strong> {{ m.1.0.profile_phone }} </p>
+          {%endif%}
+
           <p>
-            <br/>
-            <a style="width:100%;margin:auto;background-color:purple" class="btn btn-primary" href="mailto:{{ m.1.0.profile_user.email }}" >Connect via Email!</a>
+          <a style="width:100%;margin:auto;background-color:purple" class="btn btn-primary" href="mailto:{{ m.1.0.profile_user.email }}" >Connect via Email!</a>
           </strong>
           </p>
-          <p>Phone: {{ m.1.0.profile_phone }} </p>
+
           <div class="userID" hidden>{{ m.1.0.profile_user.id }}</div>
           <div style="background:green" class="btn matchbutton btn-primary">Matched<br/>Unmatch?</div>
         </div>

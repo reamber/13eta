@@ -14,10 +14,10 @@ class ProfileTests(TestCase):
     def setUp(self):
         self.client = Client()
         User = get_user_model()
-        self.user = User.objects.create_user(username='temporary',first_name="TestFirstName", last_name="TestLastName")
+        self.user = User.objects.create_user(email="test@test.com",username='temporary',first_name="TestFirstName", last_name="TestLastName")
         self.profuser = User.objects.create_user(username='profile',first_name="TestFirstName", last_name="TestLastName")
 
-        self.test_profile = profile(profile_pic="1",profile_background_image="2",profile_bio="3",profile_major="4",profile_year="4",profile_phone="6", profile_email="6",profile_user=self.profuser)
+        self.test_profile = profile(profile_pic="1",profile_background_image="2",profile_bio="3",profile_major="4",profile_year="4",profile_phone="6", profile_email="test@test.com",profile_user=self.profuser)
 
         self.test_profile.save()
 
@@ -74,7 +74,7 @@ class ProfileTests(TestCase):
     def test_user_profile_template_email(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/profile/').content.decode('utf8')
-        self.assertIn("Email: </strong> 6", str(response))
+        self.assertIn("Email: </strong> test@test.com", str(response))
 
     def test_user_profile_template_phone(self):
         self.client.login(username="profile",password="temporary")

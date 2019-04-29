@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.template import RequestContext
 from django.template.loader import render_to_string
 
-from user_profile.models import profile
+from user_profile.models import profile, InterestTag
 from match_site.models import MatchSelection
 
 class MatchTests(TestCase):
@@ -18,7 +18,7 @@ class MatchTests(TestCase):
         self.user = User.objects.create_user(username='temporary',first_name="TestFirstName", last_name="TestLastName")
         self.profuser = User.objects.create_user(username='profile',first_name="TestFirstName", last_name="TestLastName")
 
-        self.test_profile = profile(profile_pic="1",profile_background_image="2",profile_bio="3",profile_year="4",profile_major="4",profile_interests="5",profile_phone="6",profile_email="6",profile_user=self.profuser)
+        self.test_profile = profile(profile_pic="1",profile_background_image="2",profile_bio="3",profile_year="4",profile_major="4",profile_phone="6",profile_email="6",profile_user=self.profuser)
         self.test_prof2 = profile(profile_user=self.user)
 
         self.test_profile.save()
@@ -44,7 +44,7 @@ class MatchTests(TestCase):
         self.m.save()
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/match/showpending').content.decode('utf8')
-        self.assertIn("Your match requests", str(response))
+        self.assertIn("Sent Match Requests", str(response))
  
     def test_matches_page_with_matches(self):
         m1 = MatchSelection(user_one=self.profuser,user_two=self.user)
@@ -53,7 +53,7 @@ class MatchTests(TestCase):
         m2.save()
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/match/showmatches').content.decode('utf8')
-        self.assertIn("Your confirmed matches", str(response))
+        self.assertIn("Your Confirmed Matches", str(response))
 
     def tearDown(self):
         self.user.delete()

@@ -24,7 +24,7 @@ def SearchResultsView(request):
 
     match_list=profile.objects.all()  
     search_results = []
-    profile_list=list(profile.objects.exclude(profile_user=request.user))
+    profile_list=list(profile.objects.exclude(profile_user=request.user).exclude(profile_perm_view=False).exclude(profile_perm_search=False))
     query=request.GET['search'].lower()
     print(query)
 

@@ -24,5 +24,7 @@ urlpatterns = [
     path('getNewProfile', views.GetNewProfileView, name="Get new profile"),
     path('editprofile', views.EditProfileView, name="Edit profile"),
     path('saveprofile', views.SaveProfileEditsView, name="Save edited profile"),
+    path('settings', views.SettingsView, name="Settings"),
+    path('savesettings', views.SaveSettingsView, name="Save Settings"),
     path('', views.GetProfileView, name="User Profile"),
 ]

@@ -39,21 +39,21 @@ span.buttonText {
  * End style from https://developers.google.com/identity/sign-in/web/build-button
  */
 
- .carousel-control-next {
+.carousel-control-next {
   filter: invert(100%);
 }
 
 /* .carousel-control-next-icon:after
 {
-  content: '>';
-  font-size: 55px;
-  color: red;
+content: '>';
+font-size: 55px;
+color: red;
 }
 
 .carousel-control-prev-icon:after {
-  content: '<';
-  font-size: 55px;
-  color: red;
+content: '<';
+font-size: 55px;
+color: red;
 } */
 
 .profilepic{
@@ -153,3 +153,4 @@ span.buttonText {
 .col-md-3{
   margin-top:10px !important;
 }
+
