@@ -38,14 +38,30 @@ class MatchTests(TestCase):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/match/showpending').content.decode('utf8')
         self.assertIn("You have no match requests right now, go look for some new matches!", str(response))
-        
+
+    def test_new_match(self):
+        self.client.login(username="profile",password="temporary")
+        m1 = MatchSelection(user_one=self.profuser,user_two=self.user)
+        m2 = MatchSelection(user_one=self.user,user_two=self.profuser)
+        m1.save()
+        m2.save()
+        response = self.client.get('/match/showmatches').content.decode('utf8')
+        self.assertIn("Bio: </strong> ", str(response))
+
+    def test_nomatch(self):
+        self.client.login(username="profile",password="temporary")
+        m1 = MatchSelection(user_one=self.profuser,user_two=self.user)
+        m2 = MatchSelection(user_one=self.user,user_two=self.profuser)
+        response = self.client.get('/match/showmatches').content.decode('utf8')
+        self.assertNotIn("Bio: </strong> ", str(response))
+
     def test_pendingmatches_page_with_matches(self):
         self.m = MatchSelection(user_one=self.profuser,user_two=self.user)
         self.m.save()
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/match/showpending').content.decode('utf8')
         self.assertIn("Sent Match Requests", str(response))
- 
+
     def test_matches_page_with_matches(self):
         m1 = MatchSelection(user_one=self.profuser,user_two=self.user)
         m2 = MatchSelection(user_one=self.user,user_two=self.profuser)
