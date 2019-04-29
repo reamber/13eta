@@ -52,7 +52,7 @@ def GetNewProfileView(request):
             profile_bio=request.POST['profile_bio'],
             profile_year=request.POST['profile_year'],
             profile_major=request.POST['profile_major'],
-            profile_email=request.user.email,
+            profile_email=request.POST['profile_email'],
             profile_phone=request.POST['profile_phone'],
             profile_user=request.user
         )
@@ -98,6 +98,7 @@ def SaveProfileEditsView(request):
             user_profile.profile_major=request.POST['profile_major']
             user_profile.profile_year=request.POST['profile_year']
             user_profile.profile_phone=request.POST['profile_phone']
+            user_profile.profile_email=request.POST['profile_email']
             user_profile.save()
             prev_tags = InterestTag.objects.filter(tag_user=request.user)
             new_tags = []
