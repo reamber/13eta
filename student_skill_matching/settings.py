@@ -23,7 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rc6id6zr9(zfke8+_e^9z!to1(^s88+z9856r@$uw0m9ht6mjv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'student-skill-match-cs3240.herokuapp.com']
 
@@ -153,8 +154,9 @@ MEDIA_ROOT="user_media/"
 MEDIA_URL = '/media/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER="13eta3240@gmail.com"
-EMAIL_HOST_PASSWORD="cs3240team13"
+EMAIL_HOST_USER="apikey"
+EMAIL_HOST_PASSWORD="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"
+DEFAULT_FROM_EMAIL = 'team13eta@studentskillmatch.com'
