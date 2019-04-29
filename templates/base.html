@@ -57,11 +57,9 @@
           </li>                            
         </ul>
       </div>  
-
         <div class="search-container">
-          <form action="/action_page.php">
-            <input type="text" placeholder="Search People" name="search">
-            <button type="submit">Submit</button>
+          <form action="/searchresults" method="get">
+            <input type="text" placeholder="Search People" name="search" onkeypress="submit">
           </form>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
