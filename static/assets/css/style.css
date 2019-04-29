@@ -39,21 +39,21 @@ span.buttonText {
  * End style from https://developers.google.com/identity/sign-in/web/build-button
  */
 
- .carousel-control-next {
+.carousel-control-next {
   filter: invert(100%);
 }
 
 /* .carousel-control-next-icon:after
 {
-  content: '>';
-  font-size: 55px;
-  color: red;
+content: '>';
+font-size: 55px;
+color: red;
 }
 
 .carousel-control-prev-icon:after {
-  content: '<';
-  font-size: 55px;
-  color: red;
+content: '<';
+font-size: 55px;
+color: red;
 } */
 
 .profilepic{
@@ -139,6 +139,7 @@ span.buttonText {
   border-radius:0 !important;
   color:rgb(154, 157, 160);
   box-shadow: none !important;
+  border-radius: 0px 0px 10px 10px !important;
 }
 
 .match-menu-selected{
@@ -152,3 +153,4 @@ span.buttonText {
 .col-md-3{
   margin-top:10px !important;
 }
+

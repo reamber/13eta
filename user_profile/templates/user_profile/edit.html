@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<h1>{{ "Edit Your Profile" }}</h1>
+
 
 <script>
   function readURL(input, id) {
@@ -16,6 +16,13 @@
     }
   }
 </script>
+ 
+
+
+
+<br/>
+<h2 style="text-align:center">Edit Your Profile</h2>
+<hr/>
 
 <form action="/profile/saveprofile" method="post" enctype="multipart/form-data">
   {% csrf_token %}
@@ -29,8 +36,7 @@
             <input type="file" accept="image/*" id="profile_pic" name="profile_pic" onchange="readURL(this,'pic_preview');"></input>
           </div>
         </div>
-        <hr/>
-
+        <br/>
         <div class = "row">
           <div class="col-5">
             Background Image: 
@@ -87,14 +93,6 @@
           </div>
           <input style="width:100%" type="text" name="profile_phone">
           <hr />
-
-          <div class = "row">
-              <div class="col-5">
-                Enter Your Email: <br>
-              </div>
-            </div>
-            <input style="width:100%" type="text" name="profile_email">
-            <hr />
 
         <input type="submit" value="Submit Changes">
         <br/>

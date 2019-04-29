@@ -16,7 +16,7 @@
     </h2>
   </div>
   {% else %}
-  <h2>Your confirmed matches</h2>
+  <h2 style="text-align: center;">Your Confirmed Matches</h2>
   <hr class="my-4"/>
   <div class="container">
     <div class="row">
@@ -35,9 +35,18 @@
               {% endfor %}
             </div>
           </div>
-          <p><strong>Connect with them now: </strong> </p>
-          <p>Phone: {{ m.1.0.profile_phone }} </p>
-          <p>Email: {{ m.1.0.profile_email }} </p>
+
+          <hr/>
+
+          {%if m.1.0.profile_perm_phone and not m.1.0.profile_phone == "" %}
+          <p><strong>Phone:</strong> {{ m.1.0.profile_phone }} </p>
+          {%endif%}
+
+          <p>
+          <a style="width:100%;margin:auto;background-color:purple" class="btn btn-primary" href="mailto:{{ m.1.0.profile_user.email }}" >Connect via Email!</a>
+          </strong>
+          </p>
+
           <div class="userID" hidden>{{ m.1.0.profile_user.id }}</div>
           <div style="background:green" class="btn matchbutton btn-primary">Matched<br/>Unmatch?</div>
         </div>

@@ -28,7 +28,7 @@ $(document).ready(function(){
           button.html("Match Pending<br/>Unmatch?");
           button.css("background","orange");
           button.css("line-height","");
-        }else if(data.responseText==="Match Already Exists"){
+        }else if(data.responseText==="Match already Exists"){
           button.html("Match Pending<br/>Unmatch?");
           button.css("background","orange");
           button.css("line-height","");

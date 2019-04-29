@@ -34,14 +34,14 @@ def GetProfileView(request):
             return render(request, 'user_profile/signup.html')
 
     else:
-        return render(request, 'user_profile/profile_login.html')
+        return render(request, 'not_logged_in.html')
 
 def SignupView(request):
     template_name = 'user_profile/signup.html'
     return render(request, template_name)
 
 def NotSignedInView(request):
-    template_name = 'user_profile/profile_login.html'
+    template_name = 'not_logged_in.html'
     return render(request, template_name)
 
 def GetNewProfileView(request):
@@ -52,7 +52,7 @@ def GetNewProfileView(request):
             profile_bio=request.POST['profile_bio'],
             profile_year=request.POST['profile_year'],
             profile_major=request.POST['profile_major'],
-            profile_email=request.POST['profile_email'],
+            profile_email=request.user.email,
             profile_phone=request.POST['profile_phone'],
             profile_user=request.user
         )
@@ -116,3 +116,29 @@ def SaveProfileEditsView(request):
         else:
             return HttpResponseForbidden("Form Error")
     return HttpResponseRedirect('/profile')
+
+def SettingsView(request):
+    if request.user.is_authenticated:
+        prof = profile.objects.filter(profile_user=request.user)[0]
+        context={
+            "see_phone":prof.profile_perm_phone,
+            "notification":prof.profile_perm_notify,
+            "search_prof":prof.profile_perm_search,
+            "see_prof":prof.profile_perm_view,
+        }
+        return render(request, 'user_profile/settings.html', context)
+    else:
+        return render(request, 'not_logged_in.html')
+
+def SaveSettingsView(request):
+    if request.user.is_authenticated:
+        prof = profile.objects.filter(profile_user=request.user)[0]
+        print(request.POST)
+        prof.profile_perm_phone=("phone" in request.POST.keys())
+        prof.profile_perm_notify=("notify" in request.POST.keys()) 
+        prof.profile_perm_search=("search" in request.POST.keys())
+        prof.profile_perm_view=("view" in request.POST.keys())
+        prof.save()
+        return HttpResponseRedirect('/profile/settings')
+    else:
+        return render(request, 'not_logged_in.html')
