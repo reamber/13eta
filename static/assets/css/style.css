@@ -1,4 +1,5 @@
-//From https://developers.google.com/identity/sign-in/web/build-button
+/* From https://developers.google.com/identity/sign-in/web/build-button */
+
 #customBtn {
   display: inline-block;
   background: white;
@@ -9,6 +10,7 @@
   box-shadow: 1px 1px 1px grey;
   white-space: nowrap;
 }
+
 #customBtn:hover {
   cursor: pointer;
 }
@@ -37,6 +39,23 @@ span.buttonText {
  * End style from https://developers.google.com/identity/sign-in/web/build-button
  */
 
+.carousel-control-next {
+  filter: invert(100%);
+}
+
+/* .carousel-control-next-icon:after
+{
+content: '>';
+font-size: 55px;
+color: red;
+}
+
+.carousel-control-prev-icon:after {
+content: '<';
+font-size: 55px;
+color: red;
+} */
+
 .profilepic{
   width:150px;
   height:150px;
@@ -59,6 +78,7 @@ span.buttonText {
   border:0px !important;
   top: 120px;
   left: 30px;
+  border-radius: .5em;
 }
 
 .image-container .profilebackground{
@@ -83,8 +103,8 @@ span.buttonText {
   border-radius: 3px;
   border-style: solid;
   white-space: nowrap;
-  background: #007bff;
-  border-color: #007bff;
+  background: #8d917e;
+  border-color: #8d917e;
   font-weight: bold;
   color: white;
 }
@@ -119,6 +139,7 @@ span.buttonText {
   border-radius:0 !important;
   color:rgb(154, 157, 160);
   box-shadow: none !important;
+  border-radius: 0px 0px 10px 10px !important;
 }
 
 .match-menu-selected{
@@ -127,4 +148,52 @@ span.buttonText {
 
 .match-menu:focus, .match-menu:hover {
   color: rgba(255,255,255,.75);
+}
+
+.col-md-3{
+  margin-top:10px !important;
+}
+
+.pageFooter{
+  font-family: 'Indie Flower', cursive;
+  font-size: 1em;
+  text-align: center;
+}
+
+.logo img{
+
+  margin-left: 1%;
+  max-width: 8%;
+  min-width: 80px;
+
+}
+
+.logo h{
+
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.7em;
+  float: right;
+  margin-top: 1%;
+  margin-left: auto;
+  margin-right: 1%;
+  vertical-align: center;
+
+}
+
+@media screen and (max-width: 1100px) {
+
+  .logo h{
+    display:none;
+  }
+
+}
+
+#home {
+  font-family: 'Raleway', sans-serif;
+  font-size: 3.5em;
+}
+
+#about {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 2em;
 }

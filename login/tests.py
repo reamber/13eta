@@ -22,7 +22,23 @@ class AuthTests(TestCase):
 
     def test_matchpage_without_signin(self):
         response = self.client.get('/match/').content.decode('utf8')
-        self.assertIn("Please log in", str(response))
+        self.assertIn("You are not signed in!", str(response))
+
+    def test_matchpage_showmatches_without_signin(self):
+        response = self.client.get('/match/showmatches').content.decode('utf8')
+        self.assertIn("You are not signed in!", str(response))
+
+    def test_matchpage_showpending_without_signin(self):
+        response = self.client.get('/match/showpending').content.decode('utf8')
+        self.assertIn("You are not signed in!", str(response))
+
+    def test_matchpage_showprofile_without_signin(self):
+        response = self.client.get('/match/showprofiles').content.decode('utf8')
+        self.assertIn("You are not signed in!", str(response))
+
+    def test_search_without_signin(self):
+        response = self.client.get('/searchresults?search=test').content.decode('utf8')
+        self.assertIn("You are not signed in!", str(response))
 
     def test_profilepage_without_signin(self):
         response = self.client.get('/profile/').content.decode('utf8')

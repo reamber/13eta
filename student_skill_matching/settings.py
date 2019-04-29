@@ -148,6 +148,13 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
-MEDIA_ROOT="user_media/"
+MEDIA_ROOT= "user_media/"
 MEDIA_URL = '/media/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER="apikey"
+EMAIL_HOST_PASSWORD="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"
+DEFAULT_FROM_EMAIL = 'team13eta@studentskillmatch.com'

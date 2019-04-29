@@ -27,15 +27,19 @@ $(document).ready(function(){
         if(data.responseText==="Match created"){
           button.html("Match Pending<br/>Unmatch?");
           button.css("background","orange");
-        }else if(data.responseText==="Match Already Exists"){
+          button.css("line-height","");
+        }else if(data.responseText==="Match already Exists"){
           button.html("Match Pending<br/>Unmatch?");
           button.css("background","orange");
+          button.css("line-height","");
         }else if(data.responseText==="Match removed"){
           button.html("Match");
-          button.css("background","")
+          button.css("background","");
+          button.css("line-height","48px");
         }else if(data.responseText==="Match completed"){
           button.html("Matched<br/>Unmatch?");
           button.css("background","green");
+          button.css("line-height","");
         }
       }
     });
