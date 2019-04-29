@@ -8,7 +8,7 @@ def findSchedules(workHours, dayHours, pattern):
 
     diff = workHours - totalHours
     constructResult(list(pattern), 0, diff, dayHours, result)
-    print result
+    print(result)
 
 
 def constructResult(patternArr, index, diff, dayHours, result):
@@ -28,4 +28,4 @@ def constructResult(patternArr, index, diff, dayHours, result):
 
 
 findSchedules(24, 4, "08??840")
-findSchedules(3, 2, "??2??00") 
+findSchedules(3, 2, "??2??00")

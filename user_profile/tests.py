@@ -89,7 +89,6 @@ class ProfileTests(TestCase):
     def test_user_has_contact_info(self):
         self.client.login(username='profile', password='temporary')
         response = self.client.get('/profile/').content.decode('utf8')
-        print(response)
         self.assertIsNot(response, " ", 'message')
 
     def tearDown(self):
