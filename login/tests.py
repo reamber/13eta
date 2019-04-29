@@ -40,6 +40,14 @@ class AuthTests(TestCase):
         response = self.client.get('/searchresults?search=test').content.decode('utf8')
         self.assertIn("You are not signed in!", str(response))
 
+    def test_editprofile_without_signin(self):
+        response = self.client.get('/profile/editprofile').content.decode('utf8')
+        self.assertIn("You are not signed in!", str(response))
+
+    def test_setting_without_signin(self):
+        response = self.client.get('/searchresults?search=test').content.decode('utf8')
+        self.assertIn("You are not signed in!", str(response))
+
     def test_profilepage_without_signin(self):
         response = self.client.get('/profile/').content.decode('utf8')
         self.assertIn("You are not signed in!", str(response))

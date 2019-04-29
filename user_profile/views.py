@@ -85,6 +85,8 @@ def EditProfileView(request):
             return render(request, template_name, context)
         except Exception as e:
             return render(request, 'user_profile/signup.html')
+    else:
+        return render(request, 'not_logged_in.html')
 
 def SaveProfileEditsView(request):
     if request.user.is_authenticated:
