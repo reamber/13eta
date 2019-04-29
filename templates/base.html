@@ -20,15 +20,15 @@
 <script type="text/javascript" src="{% static "assets/js/bootstrap.min.js" %}"></script>
 <link rel="shortcut icon" type="image/ico" href="{% static "assets/images/favicon.ico" %}"/>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">   
+  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
       <a class="nav-link" href="/">Home</a>
       </li>
-      <!--li class="nav-item"> 
+      <!--li class="nav-item">
             <a class="nav-link" href="#">Messaging</a>
           </li-->
-      <li class="nav-item"> 
+      <li class="nav-item">
       <a class="nav-link" href="/match">Find a Match</a>
       </li>
       <li class="nav-item dropdown" >
@@ -38,18 +38,17 @@
         <div class="" style="padding:.125rem .75rem;margin:.125rem .75rem;background:rgb(33, 37, 41);color:#ffffff;" > Signed in as {{ user.get_full_name }} </div>
         {% endif %}
         <a class="dropdown-item" href="/profile">My Profile</a>
-        <a class="dropdown-item" href="/profile/settings">Settings</a>
       </div>
       </li>
-      <li class="nav-item"> 
+      <li class="nav-item">
       {% if user.is_authenticated %}
       <a id="google-signin" class="nav-link" href="{% url 'login:signout' %}">Sign Out</a>
       {% else %}
       <a id="google-signin" class="nav-link" href="{% url 'social:begin' 'google-oauth2' %}">Sign In</a>
       {% endif %}
-      </li>                            
+      </li>
     </ul>
-  </div>  
+  </div>
   <div style="position:absolute;left:50%;margin-left:-50px;text-align:center; font-size:2em;width:100px;">
     <a href="/" style="text-decoration:none;">
       <span style="color:white;font-family: 'Work Sans', sans-serif;"><span style="color: red;">13</span>eta</span>
