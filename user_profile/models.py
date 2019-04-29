@@ -1,6 +1,7 @@
 from django.db import models
 
 from django.contrib.auth.models import User
+from match_site.models import MatchSelection
 
 # Create your models here.
 class profile(models.Model):

@@ -95,6 +95,7 @@ def UserMatches(request):
         template_name = 'match_site/user_match_list.html'
     else:
         template_name = 'not_logged_in.html'
+        return render(request, template_name, context)
 
     matches = list(MatchSelection.objects.filter(user_one=request.user))
     confirmed_matches = []

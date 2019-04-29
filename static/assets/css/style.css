@@ -139,6 +139,7 @@ span.buttonText {
   border-radius:0 !important;
   color:rgb(154, 157, 160);
   box-shadow: none !important;
+  border-radius: 0px 0px 10px 10px !important;
 }
 
 .match-menu-selected{
