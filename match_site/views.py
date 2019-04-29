@@ -117,7 +117,11 @@ def UserMatches(request):
             confirmed_matches.append(m)
     match_list=confirmed_matches
     for i in range(len(match_list)):
-        m_profile = profile.objects.get(profile_user=match_list[i].user_two)
+        try:
+            m_profile = profile.objects.get(profile_user=match_list[i].user_two)
+        except:
+            match_list.remove(match_list[i])
+            continue
         if not m_profile.profile_perm_view:
             match_list.remove(match_list[i])
             continue
@@ -149,8 +153,13 @@ def UserPendingMatches(request):
             confirmed_matches.append(m)
     try:
         match_list=list(set(list(MatchSelection.objects.filter(user_one=request.user))) - set(confirmed_matches))
+        print(match_list)
         for i in range(len(match_list)):
-            m_profile = profile.objects.get(profile_user=match_list[i].user_two)
+            try:
+                m_profile = profile.objects.get(profile_user=match_list[i].user_two)
+            except:
+                match_list.remove(match_list[i])
+                continue
             if not m_profile.profile_perm_view:
                 match_list.remove(match_list[i])
                 continue 
