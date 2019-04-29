@@ -7,59 +7,68 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- STYLE SHEETS -->
-    <link href="{% static "assets/css/style.css" %}" rel="stylesheet">
     <link href="{% static "assets/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "assets/css/style.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <!-- JS -->
+    <script type="text/javascript" src="{% static "assets/js/main.js" %}"></script>
     <script type="text/javascript" src="{% static "assets/js/jquery-3.3.1.min.js" %}"></script>
     <!--script type="text/javascript" src="{% static "assets/js/signin.js" %}"></script-->
     <script type="text/javascript" src="{% static "assets/js/bootstrap.min.js" %}"></script>
     <link rel="shortcut icon" type="image/ico" href="{% static "assets/images/favicon.ico" %}"/>
+
+    <div class="logo">
+      <a href="/"><img src="{% static "assets/images/final_logo.png" %}"></a>
+      <h>MaKE YOUR STUDY SESSION VaLUaBLE</h>
+    </div>
+
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-      <div style="display:inline-block;">
-        <a style="display:inline-block;" class="navbar-brand" href="/">Student Skill Match</a>
-        <div style="display:inline-block;" class="search-container">
-          <form action="/searchresults" method="get">
-            <input type="text" placeholder="Search People" name="search" onkeypress="submit">
-          </form>
-        </div>
-      </div>
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-
       <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">   
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" href="/">Home</a>
           </li>
           <!--li class="nav-item"> 
             <a class="nav-link" href="#">Messaging</a>
-            </li-->
-            <li class="nav-item"> 
-              <a class="nav-link" href="/match">Find a Match</a>
-            </li>
-            <li class="nav-item"> 
+          </li-->
+          <li class="nav-item"> 
+            <a class="nav-link" href="/match">Find a Match</a>
+          </li>
+          <li class="nav-item dropdown" >
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User Profile</a>
+            <div class="dropdown-menu"  aria-labelledby="dropdown01" style="left:-30px;">
               {% if user.is_authenticated %}
-              <a id="google-signin" class="nav-link" href="{% url 'login:signout' %}">Sign Out</a>
-              {% else %}
-              <a id="google-signin" class="nav-link" href="{% url 'social:begin' 'google-oauth2' %}">Sign In</a>
+              <div class="" style="padding:.125rem .75rem;margin:.125rem .75rem;background:rgb(33, 37, 41);color:#ffffff;" > Signed in as {{ user.get_full_name }} </div>
               {% endif %}
-            </li>
-            <li class="nav-item dropdown" >
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User Profile</a>
-              <div class="dropdown-menu"  aria-labelledby="dropdown01" style="left:-30px;">
-                {% if user.is_authenticated %}
-                <div class="" style="padding:.125rem .75rem;margin:.125rem .75rem;background:rgb(33, 37, 41);color:#ffffff;" > Signed in as {{ user.get_full_name }} </div>
-                {% endif %}
-                <a class="dropdown-item" href="/profile">My Profile</a>
-                <a class="dropdown-item" href="/profile/settings">Settings</a>
-              </div>
-            </li>                            
+              <a class="dropdown-item" href="/profile">My Profile</a>
+              <a class="dropdown-item" href="/profile/settings">Settings</a>
+            </div>
+          </li>
+          <li class="nav-item"> 
+              {% if user.is_authenticated %}
+                <a id="google-signin" class="nav-link" href="{% url 'login:signout' %}">Sign Out</a>
+              {% else %}
+                <a id="google-signin" class="nav-link" href="{% url 'social:begin' 'google-oauth2' %}">Sign In</a>
+              {% endif %}
+          </li>                            
         </ul>
       </div>  
+
+        <div class="search-container">
+          <form action="/action_page.php">
+            <input type="text" placeholder="Search People" name="search">
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
     </nav>
+
   </head>
 
   <body>
@@ -69,8 +78,11 @@
 
 
   </body>
-  <footer>
-    <!-- To add later -->
-    <br/>
+  <!-- Footer in the bottom -->
+  <footer class="pageFooter">
+    <hr>
+    <p>Site by Team 13eta</p>
+    <p>13eta Student Skill Matching <i class="fa fa-copyright" aria-hidden="true"></i> 2019</p>
   </footer>
+  
 </html>
