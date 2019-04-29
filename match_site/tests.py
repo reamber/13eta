@@ -37,24 +37,25 @@ class MatchTests(TestCase):
     def test_pendingmatches_page_no_matches(self):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/match/showpending').content.decode('utf8')
-<<<<<<< HEAD
+        print(response)
         self.assertIn("You have no pending matches right now, go look for some new matches!", str(response))
 
     def test_new_match(self):
         self.client.login(username="profile",password="temporary")
-        
-
-
-=======
+        m1 = MatchSelection(user_one=self.profuser,user_two=self.user)
+        m2 = MatchSelection(user_one=self.user,user_two=self.profuser)
+        m1.save()
+        m2.save()
+        response =
         self.assertIn("You have no match requests right now, go look for some new matches!", str(response))
-        
+
     def test_pendingmatches_page_with_matches(self):
         self.m = MatchSelection(user_one=self.profuser,user_two=self.user)
         self.m.save()
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/match/showpending').content.decode('utf8')
         self.assertIn("Sent Match Requests", str(response))
- 
+
     def test_matches_page_with_matches(self):
         m1 = MatchSelection(user_one=self.profuser,user_two=self.user)
         m2 = MatchSelection(user_one=self.user,user_two=self.profuser)
@@ -63,7 +64,8 @@ class MatchTests(TestCase):
         self.client.login(username="profile",password="temporary")
         response = self.client.get('/match/showmatches').content.decode('utf8')
         self.assertIn("Your Confirmed Matches", str(response))
->>>>>>> 9fb0fba304a6a2b31413bf1ef3b3c0d81ca01bce
+
+
 
     def tearDown(self):
         self.user.delete()
