@@ -5,18 +5,18 @@
 
 
 <script>
-  function readURL(input, id) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $('#'+id)
-          .attr('src', e.target.result)
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
+function readURL(input, id) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $('#'+id)
+        .attr('src', e.target.result)
+    };
+    reader.readAsDataURL(input.files[0]);
   }
+}
 </script>
- 
+
 
 
 
@@ -87,16 +87,18 @@
         <hr />
 
         <div class = "row">
-            <div class="col-5">
-              Enter Your Phone Number: <br>
-            </div>
+          <div class="col-5">
+            Enter Your Phone Number: <br>
           </div>
-          <input style="width:100%" type="text" name="profile_phone">
-          <hr />
+        </div>
+        <input style="width:100%" type="text" name="profile_phone">
+        <hr />
 
         <input type="submit" value="Submit Changes">
         <br/>
       </div>
+    </div>
+  </div>
 </form>
 
 {% endblock %}
