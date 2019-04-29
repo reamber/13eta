@@ -23,8 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rc6id6zr9(zfke8+_e^9z!to1(^s88+z9856r@$uw0m9ht6mjv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'student-skill-match-cs3240.herokuapp.com']
 
@@ -149,8 +148,7 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
-MEDIA_ROOT="user_media/"
+MEDIA_ROOT= "user_media/"
 MEDIA_URL = '/media/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
