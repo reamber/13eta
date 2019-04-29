@@ -191,9 +191,9 @@ color: red;
 
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 600px) {
 
-  .logo h{
+  #textLogo{
     display:none;
   }
 
